@@ -406,36 +406,24 @@ void Model::keyDown(int& score, const int grid_num) {
 		case 'W':
 		case 'w':
 		case 72: // 上方向的小键盘
-			mciSendString("close click", NULL, 0, NULL);
-			mciSendString("open ./click.wav alias click", NULL, 0, NULL);
-			mciSendString("play click", NULL, 0, NULL);
 			this->moveUp(score, grid_num);
 			randIntNum(grid_num);
 			break;
 		case 'S':
 		case 's':
 		case 80: // 下方向的小键盘
-			mciSendString("close click", NULL, 0, NULL);
-			mciSendString("open ./click.wav alias click", NULL, 0, NULL);
-			mciSendString("play click", NULL, 0, NULL);
 			moveDown(score, grid_num);
 			randIntNum(grid_num);
 			break;
 		case 'A':
 		case 'a':
 		case 75: // 左方向的小键盘
-			mciSendString("close click", NULL, 0, NULL);
-			mciSendString("open ./click.wav alias click", NULL, 0, NULL);
-			mciSendString("play click", NULL, 0, NULL);
 			moveLeft(score, grid_num);
 			randIntNum(grid_num);
 			break;
 		case 'D':
 		case 'd':
 		case 77: // 右方向的小键盘
-			mciSendString("close click", NULL, 0, NULL);
-			mciSendString("open ./click.wav alias click", NULL, 0, NULL);
-			mciSendString("play click", NULL, 0, NULL);
 			moveRight(score, grid_num);
 			randIntNum(grid_num);
 			break;

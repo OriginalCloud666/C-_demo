@@ -139,9 +139,9 @@ void Model::mouseControl(int grid_num, int grid_length, int width, int height) {
 	}
 }
 
-//游戏结束判断
-int Model::over(int grid_num) {//判断是否达到通关条件
-	int count = 0;//计数器
+// 游戏结束判断
+int Model::over(int grid_num) { // 判断是否达到通关条件
+	int count = 0; // 计数器
 	for (int i = 0; i < grid_num; i++) {
 		for (int k = 0; k < grid_num; k++) {
 			if (this->gameMapVec[i][k] == -1) {

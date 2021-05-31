@@ -17,6 +17,7 @@ int main(int argc, char* argv) {
 	initgraph(width, height);
 	pModel->draw(bk);
 	pModel->init(star_num, height, width);
+
 	fflush(stdin); // 清空键盘消息缓冲区
 	FlushMouseMsgBuffer(); // 清空鼠标消息缓冲区
 

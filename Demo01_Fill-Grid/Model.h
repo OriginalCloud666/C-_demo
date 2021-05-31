@@ -1,4 +1,4 @@
-#pragma once; // 避免头文件重复定义
+#pragma once // 避免头文件重复定义
 #pragma comment(lib,"winmm.lib") // 加载静态库
 
 #include <iostream>
@@ -23,9 +23,9 @@ public:
 	~Model() = default;
 	void load(IMAGE& bk); // 加载资源
 	void bgm(); // 加载音乐
-	void init(int grid_num, int grid_length, int width, int height); // 初始化数据
-	void welcome(IMAGE& bk, int width, int height); // 绘制开始界面
-	void draw(IMAGE& bk, int grid_num, int grid_length, int width, int height); // 绘制游戏界面
-	void mouseControl(int grid_num, int grid_length, int width, int height); // 鼠标消息响应
-	int over(int grid_num); // 结束条件判断
+	void init(const int grid_num, const int grid_length, const int width, const int height); // 初始化数据
+	void welcome(IMAGE& bk, const int width, const int height); // 绘制开始界面
+	void draw(IMAGE& bk, const int grid_num, const int grid_length, const int width, const int height); // 绘制游戏界面
+	void mouseControl(const int grid_num, const int grid_length, const int width, const int height); // 鼠标消息响应
+	int over(const int grid_num); // 结束条件判断
 };

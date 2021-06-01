@@ -22,4 +22,4 @@
 
 - **简单介绍：实现的一个`Pulse-Wave`（律动水波）动态效果，模拟水波。**
 
-![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210601234121.png
+![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210601234121.png)

@@ -12,9 +12,9 @@
 
 ![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210531224657.png)
 
-#### Demo_03：2048-Game
+#### Demo_03：Mobile-Grid
 
-- **简单介绍：实现的一个`2048-Game`（2048）小游戏，累加到2048即可通关。**
+- **简单介绍：实现的一个`Mobile-Grid`（2048）小游戏，累加到2048即可通关。**
 
 ![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210601014630.png)
 

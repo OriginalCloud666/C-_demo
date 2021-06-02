@@ -34,4 +34,4 @@
 
 - **简单介绍：实现的一个`Scan-Mines`（扫雷）小游戏，使用鼠标操作，三种难度模式。**
 
-![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210603013858.png)
+![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210603015752.png)

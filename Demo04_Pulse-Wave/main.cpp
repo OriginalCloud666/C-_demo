@@ -20,6 +20,9 @@ int main(int argc, char* argv) {
 	initgraph(width, height);
 	pModel->init(src_img, dest_img, pic_width, pic_height);
 
+	fflush(stdin); // 清空键盘消息缓冲区
+	FlushMouseMsgBuffer(); // 清空鼠标消息缓存
+
 	BeginBatchDraw();
 	while (true) {
 		pModel->frameFun(pic_width, pic_height, width, height);

@@ -28,10 +28,10 @@
 
 - **简单介绍：实现的一个`Music-Album`（音乐相册）动态效果，模拟音乐相册效果。**
 
-![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210602080900.png)
+![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210603020417.png)
 
 #### Demo_06：Scan-Mines
 
 - **简单介绍：实现的一个`Scan-Mines`（扫雷）小游戏，使用鼠标操作，三种难度模式。**
 
-![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210603015752.png)
+![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210603020421.png)

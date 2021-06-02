@@ -151,6 +151,9 @@
   <ItemGroup>
     <ResourceCompile Include="Demo05_Music-Album.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="resource\picture\logo.ico" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

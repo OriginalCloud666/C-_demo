@@ -28,7 +28,7 @@ int main(int argc, char* argv) {
 		pModel->draw(bk, grid_num, grid_length, width, height);
 		FlushBatchDraw();
 		if (pModel->over(grid_num) == grid_num * grid_num) {
-			MessageBox(NULL, "游戏通关！", "提示", MB_OK);
+			MessageBox(nullptr, "游戏通关！", "提示", MB_OK);
 			break;
 		}
 	}

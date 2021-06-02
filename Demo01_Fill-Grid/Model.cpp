@@ -10,12 +10,12 @@ void Model::load(IMAGE& bk) {
 
 // 播放音乐
 void Model::bgm() {
-	mciSendString("open ./resource/music/bk.mp3 alias BGM", NULL, 0, NULL);
-	mciSendString("play BGM repeat", NULL, 0, NULL);
+	mciSendString("open ./resource/music/bk.mp3 alias BGM", nullptr, 0, nullptr);
+	mciSendString("play BGM repeat", nullptr, 0, nullptr);
 }
 
 // 初始化数据
-void Model::init(int grid_num, int grid_length, int width, int height) {
+void Model::init(const int grid_num, const int grid_length, const int width, const int height) {
 	// 初始化游戏区域坐标
 	this->left = width / 2 - (grid_num * grid_length) / 2; // 游戏区域左上角x坐标
 	this->top = height / 2 - (grid_num * grid_length) / 2; // 游戏区域左上角y坐标
@@ -34,7 +34,7 @@ void Model::init(int grid_num, int grid_length, int width, int height) {
 }
 
 // 开始界面绘制
-void Model::welcome(IMAGE& bk, int width, int height) {
+void Model::welcome(IMAGE& bk, const int width, const int height) {
 	putimage(-50, -49, &bk);
 	setbkmode(TRANSPARENT);
 	SetWindowText(GetHWnd(), "C++涂格子游戏");
@@ -60,7 +60,7 @@ void Model::welcome(IMAGE& bk, int width, int height) {
 }
 
 // 游戏界面绘制
-void Model::draw(IMAGE& bk, int grid_num, int grid_length, int width, int height) {
+void Model::draw(IMAGE& bk, const int grid_num, const int grid_length, const int width, const int height) {
 	cleardevice();
 	putimage(-50, -49, &bk);
 
@@ -107,7 +107,7 @@ void Model::draw(IMAGE& bk, int grid_num, int grid_length, int width, int height
 }
 
 // 鼠标消息响应
-void Model::mouseControl(int grid_num, int grid_length, int width, int height) {
+void Model::mouseControl(const int grid_num, const int grid_length, const int width, const int height) {
 	// 判断是否有鼠标消息
 	if (MouseHit()) {
 		// 获取鼠标消息
@@ -140,7 +140,7 @@ void Model::mouseControl(int grid_num, int grid_length, int width, int height) {
 }
 
 // 游戏结束判断
-int Model::over(int grid_num) { // 判断是否达到通关条件
+int Model::over(const int grid_num) { // 判断是否达到通关条件
 	int count = 0; // 计数器
 	for (int i = 0; i < grid_num; i++) {
 		for (int k = 0; k < grid_num; k++) {

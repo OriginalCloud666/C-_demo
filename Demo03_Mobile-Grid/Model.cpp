@@ -1,16 +1,21 @@
 #include "Model.h"
 using namespace std;
 
-Model::Model() :top(0), left(0), down(0), right(0) {}
+Model::Model() :score(0), top(0), left(0), down(0), right(0) {}
+
+// 获取score
+int& Model::getScore() {
+	return this->score;
+}
 
 // 加载资源
-void Model::load(IMAGE& bk, IMAGE img[], int imgIndex[], const int grid_length, const int width, const int height) {
+void Model::load(IMAGE& bk, vector<IMAGE>& img, vector<int>& imgIndex, const int grid_length, const int width, const int height, const int photo_num) {
 	// 加载数字图片
-	for (int i = 0; i < 12; i++) {
+	for (int i = 0; i < photo_num; i++) {
 		// 批量加载
 		char fileName[25]; // 定义字符数组，用来存放带有拓展名的图片名称
 		sprintf(fileName, "./resource/picture/%d.bmp", imgIndex[i]);
-		loadimage(img + i, fileName, grid_length, grid_length);
+		loadimage(&img[i], fileName, grid_length, grid_length);
 	}
 	// 加载背景图片
 	loadimage(&bk, "./resource/picture/bk.jpg", width, height);
@@ -18,8 +23,8 @@ void Model::load(IMAGE& bk, IMAGE img[], int imgIndex[], const int grid_length, 
 
 // 加载音乐
 void Model::bgm() {
-	mciSendString("open ./resource/music/bk.mp3 alias BGM", NULL, 0, NULL);
-	mciSendString("play BGM repeat", NULL, 0, NULL);
+	mciSendString("open ./resource/music/bk.mp3 alias BGM", nullptr, 0, nullptr);
+	mciSendString("play BGM repeat", nullptr, 0, nullptr);
 }
 
 // 初始化数据
@@ -61,7 +66,7 @@ void Model::welcome(IMAGE& bk) {
 }
 
 // 游戏界面绘制
-void Model::draw(IMAGE& bk, IMAGE img[], int imgIndex[], const int grid_num, const int grid_length, const int score) {
+void Model::draw(IMAGE& bk, vector<IMAGE>& img, vector<int>& imgIndex, const int grid_num, const int grid_length, const int photo_num) {
 	cleardevice();
 	putimage(0, 0, &bk);
 
@@ -107,14 +112,14 @@ void Model::draw(IMAGE& bk, IMAGE img[], int imgIndex[], const int grid_num, con
 			// 将数组下标转化为坐标
 			int x = this->left + j * grid_length;
 			int y = this->top + i * grid_length;
-			for (k = 0; k < 12; k++) {
+			for (k = 0; k < photo_num; k++) {
 				// 求出当前元素对应的图片序号
 				if (imgIndex[k] == this->gameMapVec[i][j]) {
 					break;
 				}
 			}
 			// 贴相应序号的图片
-			putimage(x, y, img + k);
+			putimage(x, y, &img[k]);
 		}
 	}
 
@@ -126,7 +131,7 @@ void Model::draw(IMAGE& bk, IMAGE img[], int imgIndex[], const int grid_num, con
 	settextcolor(RGB(244, 215, 215));
 	settextstyle(45, 0, "Times New Roman", 0, 0, FW_BOLD, 0, 0, 0);
 	char scoreName[20]; // 定义字符数组，用来以字符串形式存放得分
-	sprintf(scoreName, "%d ", score); // 得分写入scoreName数组
+	sprintf(scoreName, "%d ", this->score); // 得分写入scoreName数组
 	outtextxy((this->left + this->right) / 2 + 20, 137, scoreName);
 }
 
@@ -152,7 +157,7 @@ bool Model::condition1(const int grid_num) {
 bool Model::condition2(const int grid_num) {
 	int count = 0;
 	for (int i = 0; i < grid_num; i++) {
-		for (int j = 0; j < grid_num; j++) {
+		for (int j = 0; j < grid_num - 1; j++) {
 			if ((this->gameMapVec[i][j] == this->gameMapVec[i][j + 1] || this->gameMapVec[j][i] == this->gameMapVec[j + 1][i])) {
 				count++;
 			}
@@ -178,7 +183,7 @@ bool Model::over(const int grid_num) {
 
 // 随机产生一个整形数
 int Model::randIntNum(const int grid_num) {
-	srand((unsigned)(time(NULL) + rand()));
+	srand((unsigned)(time(nullptr) + rand()));
 
 	while (!this->over(grid_num)) {
 		int i = rand() % 4;
@@ -197,7 +202,7 @@ int Model::randIntNum(const int grid_num) {
 }
 
 // 向左移动
-int Model::moveLeft(int& score, const int grid_num) {
+int Model::moveLeft(const int grid_num) {
 	int flag = 0; // 游戏结束标记
 	for (int i = 0; i < grid_num; i++) {
 		for (int j = 0; j < grid_num; j++) {
@@ -212,7 +217,7 @@ int Model::moveLeft(int& score, const int grid_num) {
 							flag = 1;
 							this->gameMapVec[i][j] += this->gameMapVec[i][k];
 							this->gameMapVec[i][k] = 0;
-							score += this->gameMapVec[i][j]; // 记录得分
+							this->score += this->gameMapVec[i][j]; // 记录得分
 						}
 						k = 4; // 退出循环
 						break;
@@ -247,7 +252,7 @@ int Model::moveLeft(int& score, const int grid_num) {
 }
 
 // 向右移动
-int Model::moveRight(int& score, const int grid_num) {
+int Model::moveRight(const int grid_num) {
 	int flag = 0; // 游戏结束标志
 	for (int i = 0; i < grid_num; i++) {
 		for (int j = grid_num - 1; j >= 0; j--) {
@@ -262,7 +267,7 @@ int Model::moveRight(int& score, const int grid_num) {
 							flag = 1;
 							this->gameMapVec[i][j] += this->gameMapVec[i][k];
 							this->gameMapVec[i][k] = 0;
-							score += this->gameMapVec[i][j]; // 记录得分
+							this->score += this->gameMapVec[i][j]; // 记录得分
 						}
 						k = -1; // 退出循环
 						break;
@@ -299,7 +304,7 @@ int Model::moveRight(int& score, const int grid_num) {
 }
 
 // 向上移动
-int Model::moveUp(int& score, const int grid_num) {
+int Model::moveUp(const int grid_num) {
 	int flag = 0;
 	for (int i = 0; i < grid_num; i++) {
 		for (int j = 0; j < grid_num; j++) {
@@ -313,7 +318,7 @@ int Model::moveUp(int& score, const int grid_num) {
 							flag = 1;
 							this->gameMapVec[i][j] += this->gameMapVec[k][j];
 							this->gameMapVec[k][j] = 0;
-							score += this->gameMapVec[i][j]; // 记录得分
+							this->score += this->gameMapVec[i][j]; // 记录得分
 						}
 						k = 4;
 						break;
@@ -348,7 +353,7 @@ int Model::moveUp(int& score, const int grid_num) {
 }
 
 // 向下移动
-int Model::moveDown(int& score, const int grid_num) {
+int Model::moveDown(const int grid_num) {
 	int flag = 0;
 	for (int i = grid_num - 1; i >= 0; i--) {
 		for (int j = 0; j < grid_num; j++) {
@@ -362,7 +367,7 @@ int Model::moveDown(int& score, const int grid_num) {
 							flag = 1;
 							this->gameMapVec[i][j] += this->gameMapVec[k][j];
 							this->gameMapVec[k][j] = 0;
-							score += this->gameMapVec[i][j];//记录得分
+							this->score += this->gameMapVec[i][j];//记录得分
 						}
 						k = -1;
 						break;
@@ -397,7 +402,7 @@ int Model::moveDown(int& score, const int grid_num) {
 }
 
 // 按键响应
-void Model::keyDown(int& score, const int grid_num) {
+void Model::keyDown(const int grid_num) {
 	// 判断有无按键消息
 	while (_kbhit()) {
 		// 用于接收按键消息
@@ -406,26 +411,26 @@ void Model::keyDown(int& score, const int grid_num) {
 		case 'W':
 		case 'w':
 		case 72: // 上方向的小键盘
-			this->moveUp(score, grid_num);
-			randIntNum(grid_num);
+			this->moveUp(grid_num);
+			this->randIntNum(grid_num);
 			break;
 		case 'S':
 		case 's':
 		case 80: // 下方向的小键盘
-			moveDown(score, grid_num);
-			randIntNum(grid_num);
+			this->moveDown(grid_num);
+			this->randIntNum(grid_num);
 			break;
 		case 'A':
 		case 'a':
 		case 75: // 左方向的小键盘
-			moveLeft(score, grid_num);
-			randIntNum(grid_num);
+			this->moveLeft(grid_num);
+			this->randIntNum(grid_num);
 			break;
 		case 'D':
 		case 'd':
 		case 77: // 右方向的小键盘
-			moveRight(score, grid_num);
-			randIntNum(grid_num);
+			this->moveRight(grid_num);
+			this->randIntNum(grid_num);
 			break;
 		}
 	}

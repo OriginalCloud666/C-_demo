@@ -1,12 +1,11 @@
 #include "Model.h"
 using namespace std;
 
-Model::Model(const int pic_width, const int pic_height, const int width) {
+Model::Model(const int pic_width, const int pic_height, const int width) :flag(0) {
 	this->img_ptr1 = nullptr;
 	this->img_ptr2 = nullptr;
 	this->buf = new short[pic_height * width + pic_width];
 	this->buf2 = new short[pic_height * width + pic_width];
-	this->flag = 0;
 }
 
 Model::~Model() {
@@ -23,8 +22,8 @@ void Model::load(IMAGE& src_img, const int pic_width, const int pic_height) {
 
 // 播放音乐
 void Model::bgm() {
-	mciSendString("open ./resource/music/bk.mp3 alias BGM", NULL, 0, NULL);
-	mciSendString("play BGM repeat", NULL, 0, NULL);
+	mciSendString("open ./resource/music/bk.mp3 alias BGM", nullptr, 0, nullptr);
+	mciSendString("play BGM repeat", nullptr, 0, nullptr);
 }
 
 // 初始化数据

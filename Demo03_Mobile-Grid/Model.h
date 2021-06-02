@@ -14,6 +14,7 @@ using namespace std;
 
 class Model {
 private:
+	int score; // 记录得分
 	int top; // 地图左上角y坐标
 	int left; // 地图左上角x坐标
 	int down; // 地图右下角y坐标
@@ -22,18 +23,19 @@ private:
 public:
 	explicit Model();
 	~Model() = default;
-	void load(IMAGE& bk, IMAGE img[], int imgIndex[], const int grid_length, const int width, const int height); // 加载资源
+	int& getScore(); // 获取score
+	void load(IMAGE& bk, vector<IMAGE>& img, vector<int>& imgIndex, const int grid_length, const int width, const int height, const int photo_num); // 加载资源
 	void bgm(); // 加载音乐
 	void init(const int grid_num, const int grid_length, const int width, const int height); // 初始化数据
 	void welcome(IMAGE& bk); // 绘制开始界面
-	void draw(IMAGE& bk, IMAGE img[], int imgIndex[], const int grid_num, const int grid_length, const int score); // 绘制游戏界面
+	void draw(IMAGE& bk, vector<IMAGE>& img, vector<int>& imgIndex, const int grid_num, const int grid_length, const int photo_num); // 绘制游戏界面
 	bool condition1(const int grid_num); // 结束条件1
 	bool condition2(const int grid_num); // 结束条件2
 	bool over(const int grid_num); // 结束条件判断
 	int randIntNum(const int grid_num); // 产生整形随机数
-	int moveLeft(int& score, const int grid_num); // 向左移动
-	int moveRight(int& score, const int grid_num); // 向右移动
-	int moveUp(int& score, const int grid_num); // 向上移动
-	int moveDown(int& score, const int grid_num); // 向下移动
-	void keyDown(int& score, const int grid_num); // 键盘消息响应
+	int moveLeft(const int grid_num); // 向左移动
+	int moveRight(const int grid_num); // 向右移动
+	int moveUp(const int grid_num); // 向上移动
+	int moveDown(const int grid_num); // 向下移动
+	void keyDown(const int grid_num); // 键盘消息响应
 };

@@ -10,6 +10,8 @@ auto const fps_count = 8; // 帧率计算间隔时间
 IMAGE src_img(pic_width, pic_height); // 原位图
 IMAGE dest_img(pic_width, pic_height); // 处理后位图
 
+//-------The main method--------//
+
 int main(int argc, char* argv) {
 	unique_ptr<Model> pModel(new Model(pic_width, pic_height, width)); // Model对象
 

@@ -8,8 +8,8 @@ void Model::load(IMAGE& bk, int width, int height) {
 
 // ≤•∑≈“Ù¿÷
 void Model::bgm() {
-	mciSendString("open ./resource/music/bk.mp3 alias BGM", NULL, 0, NULL);
-	mciSendString("play BGM repeat", NULL, 0, NULL);
+	mciSendString("open ./resource/music/bk.mp3 alias BGM", nullptr, 0, nullptr);
+	mciSendString("play BGM repeat", nullptr, 0, nullptr);
 }
 
 // ≥ı ºªØ–«–«

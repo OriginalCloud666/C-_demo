@@ -23,3 +23,9 @@
 - **简单介绍：实现的一个`Pulse-Wave`（律动水波）动态效果，模拟水波。**
 
 ![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210601234121.png)
+
+#### Demo_05：Music-Album
+
+- **简单介绍：实现的一个`Music-Album`（音乐相册）动态效果，模拟音乐相册效果。**
+
+![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210602080900.png)

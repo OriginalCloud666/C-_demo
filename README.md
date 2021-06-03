@@ -41,3 +41,9 @@
 - **简单介绍：实现的一个`Shoot-Balloons`（打气球）小游戏，使用鼠标、键盘都可操作，射击气球得分。**
 
 ![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210603192738.png)
+
+#### Demo_08：Infinite-Restart
+
+- **简单介绍：实现的一个`Infinite-Restart`（无限重启）恶搞效果，使得 Windows 系统无限重复启动。**
+
+![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210603193857.jpg)

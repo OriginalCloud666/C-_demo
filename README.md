@@ -35,3 +35,9 @@
 - **简单介绍：实现的一个`Scan-Mines`（扫雷）小游戏，使用鼠标操作，三种难度模式。**
 
 ![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210603020421.png)
+
+#### Demo_07：Shoot-Balloons
+
+- **简单介绍：实现的一个`Shoot-Balloons`（打气球）小游戏，使用鼠标、键盘都可操作，射击气球得分。**
+
+![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210603192738.png)

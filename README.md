@@ -47,3 +47,10 @@
 - **简单介绍：实现的一个`Infinite-Restart`（无限重启）恶搞效果，使得 Windows 系统无限重复启动。**
 
 ![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210603193857.jpg)
+
+
+#### Demo_09：Infinite-Restart
+
+- **简单介绍：实现的一个`Battle-Balls`（球球大作战）小游戏，模仿同名热门游戏，目前不能联网仅单机。**
+
+![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210604191905.png)

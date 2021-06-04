@@ -54,3 +54,9 @@
 - **简单介绍：实现的一个`Battle-Balls`（球球大作战）小游戏，模仿同名热门游戏，目前不能联网仅单机。**
 
 ![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210604191905.png)
+
+#### Demo_10：Jigsaw-Puzzle
+
+- **简单介绍：实现的一个`Jigsaw-Puzzle`（智力拼图）小游戏，使用鼠标操作，拼好拼图即可获得胜利。**
+
+![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210604230828.png)

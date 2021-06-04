@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31321.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Demo09_Battle-Balls", "Demo09_Battle-Balls.vcxproj", "{EE9B84F3-66B9-4829-B152-2335109B9880}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EE9B84F3-66B9-4829-B152-2335109B9880}.Debug|x64.ActiveCfg = Debug|x64
+		{EE9B84F3-66B9-4829-B152-2335109B9880}.Debug|x64.Build.0 = Debug|x64
+		{EE9B84F3-66B9-4829-B152-2335109B9880}.Debug|x86.ActiveCfg = Debug|Win32
+		{EE9B84F3-66B9-4829-B152-2335109B9880}.Debug|x86.Build.0 = Debug|Win32
+		{EE9B84F3-66B9-4829-B152-2335109B9880}.Release|x64.ActiveCfg = Release|x64
+		{EE9B84F3-66B9-4829-B152-2335109B9880}.Release|x64.Build.0 = Release|x64
+		{EE9B84F3-66B9-4829-B152-2335109B9880}.Release|x86.ActiveCfg = Release|Win32
+		{EE9B84F3-66B9-4829-B152-2335109B9880}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {21B2EC89-82BF-47B6-9664-D4364A618C90}
+	EndGlobalSection
+EndGlobal

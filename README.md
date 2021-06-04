@@ -60,3 +60,9 @@
 - **简单介绍：实现的一个`Jigsaw-Puzzle`（智力拼图）小游戏，使用鼠标操作，拼好拼图即可获得胜利。**
 
 ![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210604231156.png)
+
+#### Demo_11：Sokoban
+
+- **简单介绍：实现的一个`Sokoban`（推箱子）小游戏，使用键盘操作，箱子推到指定位置即可获得胜利。**
+
+![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210605012956.png)

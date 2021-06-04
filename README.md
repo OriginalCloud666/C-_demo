@@ -59,4 +59,4 @@
 
 - **简单介绍：实现的一个`Jigsaw-Puzzle`（智力拼图）小游戏，使用鼠标操作，拼好拼图即可获得胜利。**
 
-![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210604230828.png)
+![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210604231156.png)

@@ -51,6 +51,7 @@ void Model::init(const int width, const int height, const int grid_num, const in
 void Model::welcome(IMAGE& bk) {
 	putimage(0, 0, &bk);
 	setbkmode(TRANSPARENT);
+	SetWindowText(GetHWnd(), "C++智力拼图游戏");
 
 	// 输出作者信息
 	settextcolor(RGB(220, 220, 220));

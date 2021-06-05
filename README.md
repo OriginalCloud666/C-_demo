@@ -72,3 +72,9 @@
 - **简单介绍：实现的一个`One-Stroke`（一笔画）小游戏，使用键盘操作，涂满整个区域即可。**
 
 ![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210605123714.png)
+
+#### Demo_13：Data-Rain
+
+- **简单介绍：实现的一个`Data-Rain`（数据雨）科幻效果，模仿黑客帝国数据雨的视觉动态效果。**
+
+![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210605170411.png)

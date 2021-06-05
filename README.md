@@ -66,3 +66,9 @@
 - **简单介绍：实现的一个`Sokoban`（推箱子）小游戏，使用键盘操作，箱子推到指定位置即可获得胜利。**
 
 ![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210605012956.png)
+
+#### Demo_12：One-Stroke
+
+- **简单介绍：实现的一个`One-Stroke`（一笔画）小游戏，使用键盘操作，涂满整个区域即可。**
+
+![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210605123714.png)

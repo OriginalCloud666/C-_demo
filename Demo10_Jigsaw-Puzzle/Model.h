@@ -1,33 +1,38 @@
-#pragma once // é¿å…å¤´æ–‡ä»¶é‡å¤å®šä¹‰
-#pragma comment(lib,"winmm.lib") // åŠ è½½é™æ€åº“
+#pragma once // ±ÜÃâÍ·ÎÄ¼şÖØ¸´¶¨Òå
+#pragma comment(lib,"winmm.lib") // ¼ÓÔØ¾²Ì¬¿â
 
 #include <iostream>
 #include <vector>
 #include <conio.h>
 #include <graphics.h>
 #include <mmsystem.h>
-
 using namespace std;
 
-//-------æ‹¼å›¾æ¸¸æˆç±»æ¨¡å‹--------//
+auto const width = 640; // ´°¿Ú¿í¶È
+auto const height = 720; // ´°¿Ú¸ß¶È
+auto const grid_num = 4; // ĞĞÁĞ¸ñ×ÓÊıÁ¿
+auto const grid_width = 160; // ¸ñ×Ó¿í¶È
+auto const grid_height = 180; // ¸ñ×Ó¸ß¶È
+
+//-------Æ´Í¼ÓÎÏ·ÀàÄ£ĞÍ--------//
 
 class Model {
 private:
-	int top; // åœ°å›¾å·¦ä¸Šè§’yåæ ‡
-	int left; // åœ°å›¾å·¦ä¸Šè§’xåæ ‡
-	int down; // åœ°å›¾å³ä¸‹è§’yåæ ‡
-	int right; // åœ°å›¾å³ä¸‹è§’xåæ ‡
-	vector<vector<int>> gameMapVec; // å­˜æ”¾åœ°å›¾ä¿¡æ¯
+	int top; // µØÍ¼×óÉÏ½Çy×ø±ê
+	int left; // µØÍ¼×óÉÏ½Çx×ø±ê
+	int down; // µØÍ¼ÓÒÏÂ½Çy×ø±ê
+	int right; // µØÍ¼ÓÒÏÂ½Çx×ø±ê
+	vector<vector<int>> gameMapVec; // ´æ·ÅµØÍ¼ĞÅÏ¢
 public:
 	explicit Model();
 	~Model() = default;
-	void load(IMAGE& bk, IMAGE& white, const int width, const int height); // åŠ è½½èµ„æº
-	void bgm(); // åŠ è½½éŸ³ä¹
-	void init(const int width, const int height, const int grid_num, const int grid_width, const int grid_height); // åˆå§‹åŒ–æ•°æ®
-	void welcome(IMAGE& bk); // ç»˜åˆ¶å¼€å§‹ç•Œé¢
-	void draw(IMAGE& bk, IMAGE& white, const int grid_num, const int grid_width, const int grid_height); // ç»˜åˆ¶æ¸¸æˆç•Œé¢
-	int searchArray_i(const int grid_num); // å®šä½ç™½å—ä½ç½®i
-	int searchArray_j(const int grid_num); // å®šä½ç™½å—ä½ç½®j
-	void mouseControl(const int grid_num, const int grid_width, const int grid_height); // é¼ æ ‡æ§åˆ¶
-	bool over(const int grid_num); // æ¸¸æˆç»“æŸåˆ¤æ–­
+	void load(IMAGE& bk, IMAGE& white); // ¼ÓÔØ×ÊÔ´
+	void bgm(); // ¼ÓÔØÒôÀÖ
+	void init(); // ³õÊ¼»¯Êı¾İ
+	void welcome(IMAGE& bk); // »æÖÆ¿ªÊ¼½çÃæ
+	void draw(IMAGE& bk, IMAGE& white); // »æÖÆÓÎÏ·½çÃæ
+	int searchArray_i(); // ¶¨Î»°×¿éÎ»ÖÃi
+	int searchArray_j(); // ¶¨Î»°×¿éÎ»ÖÃj
+	void mouseControl(); // Êó±ê¿ØÖÆ
+	bool over(); // ÓÎÏ·½áÊøÅĞ¶Ï
 };

@@ -20,7 +20,7 @@ struct Ball& Model::getBall() {
 }
 
 // 加载资源
-void Model::load(IMAGE& bk, const int width, const int height) {
+void Model::load(IMAGE& bk) {
 	loadimage(&bk, "./resource/picture/bk.jpg", width, height * 1.58);
 }
 
@@ -31,7 +31,7 @@ void Model::bgm() {
 }
 
 //游戏数据初始化
-void Model::init(const int brick_width, const int brick_height, const int brick_row, const int brick_col, const int width, const int height) {
+void Model::init() {
 	// 砖块数据初始化
 	this->left = width / 2 - (brick_width * brick_col) / 2;
 	this->top = height / 2 - (brick_height * (brick_row + 16)) / 2;
@@ -76,7 +76,7 @@ void Model::welcome(IMAGE& bk) {
 }
 
 // 绘制游戏界面
-void Model::draw(const int brick_width, const int brick_height, const int brick_row, const int brick_col, const int height) {
+void Model::draw() {
 	cleardevice();
 
 	// 绘制灰白色分界线
@@ -159,7 +159,7 @@ double Model::distance(const double x1, const double y1, const double x2, const 
 }
 
 // 木板移动（异步按键控制）
-void Model::keyDown1(const int width) {
+void Model::keyDown1() {
 	if (GetAsyncKeyState(VK_LEFT) || GetAsyncKeyState('A')) { // 向左移动
 		this->board.x -= this->board.step;
 		if (this->board.x <= 0) { // 设置左移界限
@@ -193,7 +193,7 @@ void Model::keyDown2() {
 }
 
 // 小球的移动相撞
-void Model::ballMove(const int width, const int height, const double pi) {
+void Model::ballMove() {
 	// 当小球碰到左右壁时
 	if (((this->ball.x <= this->ball.r) || (this->ball.x >= width - this->ball.r)) && (this->ball.y <= (double)height - this->board.height)) {
 		this->ball.dx = -this->ball.dx; // 将球反射
@@ -320,7 +320,7 @@ void Model::ballMove(const int width, const int height, const double pi) {
 }
 
 // 小球与砖块的移动碰撞
-void Model::ballCrash(const int brick_row, const int brick_col, const int brick_width, const int brick_height, const double pi) {
+void Model::ballCrash() {
 	for (int i = 0; i < brick_row; i++) {
 		for (int j = 0; j < brick_col; j++) {
 			// 将数组下标转化为坐标
@@ -456,7 +456,7 @@ void Model::ballCrash(const int brick_row, const int brick_col, const int brick_
 }
 
 // 结束条件判断
-bool Model::over(const int brick_row, const int brick_col) {
+bool Model::over() {
 	// 判断数组中是否全部为-1
 	for (int i = 0; i < brick_row; i++) {
 		for (int j = 0; j < brick_col; j++) {

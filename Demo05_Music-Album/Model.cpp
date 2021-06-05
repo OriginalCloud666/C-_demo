@@ -9,7 +9,7 @@ int& Model::getCount() {
 }
 
 // 加载资源
-void Model::load(IMAGE& bk1, IMAGE& bk2, IMAGE& w1, vector<IMAGE>& img, vector<int>& imgIndex, vector<int>& pic_width, vector<int>& pic_height, const int width, const int height, const int pic_num) {
+void Model::load(IMAGE& bk1, IMAGE& bk2, IMAGE& w1, vector<IMAGE>& img, vector<int>& imgIndex, vector<int>& pic_width, vector<int>& pic_height) {
 	loadimage(&w1, "./resource/picture/w1.png");
 	loadimage(&bk1, "./resource/picture/bk1.jpg", width, height * 1.254);
 	loadimage(&bk2, "./resource/picture/bk2.png", width, height * 1.254);
@@ -29,7 +29,7 @@ void Model::bgm() {
 }
 
 // 载入PNG图并去透明部分——背景图（比绘图窗口大）
-void Model::drawAlphabk(IMAGE* picture, const int  picture_x, const int picture_y, const int width) {
+void Model::drawAlphabk(IMAGE* picture, const int  picture_x, const int picture_y) {
 	// 变量初始化
 	DWORD* dst = GetImageBuffer(); // GetImageBuffer()函数，用于获取绘图设备的显存指针，EASYX自带
 	DWORD* draw = GetImageBuffer();
@@ -148,14 +148,14 @@ void Model::drawText(const double i, const int x0, const int y0, const int size,
 }
 
 // 绘制心形图案
-void Model::drawHeart(IMAGE& bk2, vector<IMAGE>& img, vector<int>& pic_x, vector<int>& pic_y, const int pic_num, const int width, const int x, const int y, const int size, COLORREF C, const char s[][5], const double move, const double interval, const int time) {
+void Model::drawHeart(IMAGE& bk2, vector<IMAGE>& img, vector<int>& pic_x, vector<int>& pic_y, const int x, const int y, const int size, COLORREF C, const char s[][5], const double move, const double interval, const int time) {
 	settextcolor(C);
 	settextstyle(22, 0, "楷体", 0, 0, 1000, 0, 0, 0);
 
 	for (double i = 0 + move; i <= 6.29 + move; i = i + 0.01) {
 		cleardevice(); // 在字出来之后清屏
 		putimage(pic_x[this->count % pic_num], pic_y[this->count % pic_num], &img[this->count % pic_num]);
-		drawAlphabk(&bk2, 0, 0, width);
+		drawAlphabk(&bk2, 0, 0);
 
 		// 输出作者信息
 		settextcolor(WHITE);

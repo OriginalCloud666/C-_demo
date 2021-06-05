@@ -8,8 +8,15 @@
 #include <conio.h>
 #include <graphics.h>
 #include <mmsystem.h>
-
 using namespace std;
+
+auto const width = 640; // 窗口宽度
+auto const height = 720; // 窗口高度
+auto const brick_width = 80; // 砖块宽度
+auto const brick_height = 30; // 砖块高度
+auto const brick_row = (height / brick_height - 16); // 砖块行数
+auto const brick_col = (width / brick_width); // 砖块列数
+auto const pi = 3.1415926; // π
 
 struct Board { // 木板
 	double x; // 木板x坐标
@@ -46,14 +53,14 @@ public:
 	~Model() = default;
 	struct Ball& getBall();
 	double distance(const double x1, const double y1, const double x2, const double y2); // 求两点间距离
-	void load(IMAGE& bk, const int width, const int height); // 加载资源
+	void load(IMAGE& bk); // 加载资源
 	void bgm(); // 加载音乐
-	void init(const int brick_width, const int brick_height, const int brick_row, const int brick_col, const int width, const int height); // 初始化数据
+	void init(); // 初始化数据
 	void welcome(IMAGE& bk); // 绘制开始界面
-	void draw(const int brick_width, const int brick_height, const int brick_row, const int brick_col, const int height); // 绘制游戏界面
-	void keyDown1(const int width); // 按键响应（异步）
+	void draw(); // 绘制游戏界面
+	void keyDown1(); // 按键响应（异步）
 	void keyDown2(); // 按键响应（同步）
-	void ballMove(const int width, const int hegiht, const double pi); // 小球移动碰撞
-	void ballCrash(const int brick_row, const int brick_col, const int brick_width, const int brick_height, const double pi); // 小球与砖块碰撞
-	bool over(const int brick_row, const int brick_col); // 结束条件判断
+	void ballMove(); // 小球移动碰撞
+	void ballCrash(); // 小球与砖块碰撞
+	bool over(); // 结束条件判断
 };

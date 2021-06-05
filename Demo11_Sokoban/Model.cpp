@@ -44,7 +44,7 @@ int& Model::getFlag() {
 }
 
 // 加载资源
-void Model::load(IMAGE& bk, vector<IMAGE>& img, vector<int>& imgIndex, const int pic_num, const int pic_size, const int width, const int height) {
+void Model::load(IMAGE& bk, vector<IMAGE>& img, vector<int>& imgIndex) {
 	// 批量加载图片
 	for (int i = 0; i < pic_num; i++) {
 		char fileName[25];
@@ -61,7 +61,7 @@ void Model::bgm() {
 }
 
 // 初始化游戏数据
-void Model::init(const int width, const int height, const int grid_num, const int pic_size) {
+void Model::init() {
 	// 初始化游戏区域坐标
 	this->left = width / 2 - (grid_num * pic_size) / 2;
 	this->top = height / 2 - (grid_num * pic_size) / 2;
@@ -90,7 +90,7 @@ void Model::welcome(IMAGE& bk) {
 }
 
 // 绘制游戏界面
-void Model::draw(IMAGE& bk, vector<IMAGE>& img, const int grid_num, const int pic_size) {
+void Model::draw(IMAGE& bk, vector<IMAGE>& img) {
 	cleardevice();
 	putimage(0, 0, &bk);
 
@@ -178,7 +178,7 @@ void Model::changOne(const int i, const int j) {
 }
 
 // 按键响应
-void Model::keyDown(const int grid_num) {
+void Model::keyDown() {
 	// 判断是否有键盘消息
 	while (_kbhit()) {
 		// 用于接收用户按键
@@ -290,7 +290,7 @@ void Model::keyDown(const int grid_num) {
 }
 
 // 结束条件判断
-int Model::over(const int grid_num) {
+int Model::over() {
 	// 状态标识，用于判断游戏是否结束
 	int countFlag = 1;
 	for (int i = 0; i < grid_num; i++) {
@@ -307,7 +307,7 @@ int Model::over(const int grid_num) {
 }
 
 // 游戏结束动画设置
-void Model::action(IMAGE& bk, vector<IMAGE>& img, const int grid_num, const int pic_size, const int width, const int height) {
+void Model::action(IMAGE& bk, vector<IMAGE>& img) {
 	IMAGE end, endy;
 	// 加载图片
 	loadimage(&end, "./resource/picture/end.bmp");
@@ -318,7 +318,7 @@ void Model::action(IMAGE& bk, vector<IMAGE>& img, const int grid_num, const int 
 	double startY = height;
 
 	while (startY >= height / 2 - 54.0 / 2) {
-		this->draw(bk, img, grid_num, pic_size);
+		this->draw(bk, img);
 		putimage(startX, startY, &endy, SRCAND); // 贴掩码图
 		putimage(startX, startY, &end, SRCPAINT); // 贴源码图
 		FlushBatchDraw();

@@ -9,7 +9,7 @@ int& Model::getScore() {
 }
 
 // 加载资源
-void Model::load(IMAGE& bk, vector<IMAGE>& img, vector<int>& imgIndex, const int grid_length, const int width, const int height, const int photo_num) {
+void Model::load(IMAGE& bk, vector<IMAGE>& img, vector<int>& imgIndex) {
 	// 加载数字图片
 	for (int i = 0; i < photo_num; i++) {
 		// 批量加载
@@ -28,7 +28,7 @@ void Model::bgm() {
 }
 
 // 初始化数据
-void Model::init(const int grid_num, const int grid_length, const int width, const int height) {
+void Model::init() {
 	// 初始化游戏区域坐标
 	this->left = width / 2 - (grid_num * grid_length) / 2; // 游戏区域左上角x坐标
 	this->top = height / 2 - (grid_num * grid_length) / 2; // 游戏区域左上角y坐标
@@ -66,7 +66,7 @@ void Model::welcome(IMAGE& bk) {
 }
 
 // 游戏界面绘制
-void Model::draw(IMAGE& bk, vector<IMAGE>& img, vector<int>& imgIndex, const int grid_num, const int grid_length, const int photo_num) {
+void Model::draw(IMAGE& bk, vector<IMAGE>& img, vector<int>& imgIndex) {
 	cleardevice();
 	putimage(0, 0, &bk);
 
@@ -136,7 +136,7 @@ void Model::draw(IMAGE& bk, vector<IMAGE>& img, vector<int>& imgIndex, const int
 }
 
 // 游戏结束条件1：没有格子为0，游戏结束
-bool Model::condition1(const int grid_num) {
+bool Model::condition1() {
 	int count = 0;
 	for (int i = 0; i < grid_num; i++) {
 		for (int j = 0; j < grid_num; j++) {
@@ -154,7 +154,7 @@ bool Model::condition1(const int grid_num) {
 }
 
 // 游戏结束条件2：相邻（上下，左右）的值不相等
-bool Model::condition2(const int grid_num) {
+bool Model::condition2() {
 	int count = 0;
 	for (int i = 0; i < grid_num; i++) {
 		for (int j = 0; j < grid_num - 1; j++) {
@@ -172,8 +172,8 @@ bool Model::condition2(const int grid_num) {
 }
 
 // 判断游戏是否结束
-bool Model::over(const int grid_num) {
-	if (this->condition1(grid_num) && this->condition2(grid_num)) {
+bool Model::over() {
+	if (this->condition1() && this->condition2()) {
 		return true;
 	}
 	else {
@@ -182,13 +182,13 @@ bool Model::over(const int grid_num) {
 }
 
 // 随机产生一个整形数
-int Model::randIntNum(const int grid_num) {
+int Model::randIntNum() {
 	srand((unsigned)(time(nullptr) + rand()));
 
-	while (!this->over(grid_num)) {
+	while (!this->over()) {
 		int i = rand() % 4;
 		int j = rand() % 4;
-		if (this->gameMapVec[i][j] == 0 || condition1(grid_num)) {
+		if (this->gameMapVec[i][j] == 0 || condition1()) {
 		out:
 			this->gameMapVec[i][j] = (rand() % 3) * 2; // 产生随机的0,2,4
 			// 产生0的话，该次产生的值不算
@@ -202,7 +202,7 @@ int Model::randIntNum(const int grid_num) {
 }
 
 // 向左移动
-int Model::moveLeft(const int grid_num) {
+int Model::moveLeft() {
 	int flag = 0; // 游戏结束标记
 	for (int i = 0; i < grid_num; i++) {
 		for (int j = 0; j < grid_num; j++) {
@@ -252,7 +252,7 @@ int Model::moveLeft(const int grid_num) {
 }
 
 // 向右移动
-int Model::moveRight(const int grid_num) {
+int Model::moveRight() {
 	int flag = 0; // 游戏结束标志
 	for (int i = 0; i < grid_num; i++) {
 		for (int j = grid_num - 1; j >= 0; j--) {
@@ -304,7 +304,7 @@ int Model::moveRight(const int grid_num) {
 }
 
 // 向上移动
-int Model::moveUp(const int grid_num) {
+int Model::moveUp() {
 	int flag = 0;
 	for (int i = 0; i < grid_num; i++) {
 		for (int j = 0; j < grid_num; j++) {
@@ -353,7 +353,7 @@ int Model::moveUp(const int grid_num) {
 }
 
 // 向下移动
-int Model::moveDown(const int grid_num) {
+int Model::moveDown() {
 	int flag = 0;
 	for (int i = grid_num - 1; i >= 0; i--) {
 		for (int j = 0; j < grid_num; j++) {
@@ -402,7 +402,7 @@ int Model::moveDown(const int grid_num) {
 }
 
 // 按键响应
-void Model::keyDown(const int grid_num) {
+void Model::keyDown() {
 	// 判断有无按键消息
 	while (_kbhit()) {
 		// 用于接收按键消息
@@ -411,26 +411,26 @@ void Model::keyDown(const int grid_num) {
 		case 'W':
 		case 'w':
 		case 72: // 上方向的小键盘
-			this->moveUp(grid_num);
-			this->randIntNum(grid_num);
+			this->moveUp();
+			this->randIntNum();
 			break;
 		case 'S':
 		case 's':
 		case 80: // 下方向的小键盘
-			this->moveDown(grid_num);
-			this->randIntNum(grid_num);
+			this->moveDown();
+			this->randIntNum();
 			break;
 		case 'A':
 		case 'a':
 		case 75: // 左方向的小键盘
-			this->moveLeft(grid_num);
-			this->randIntNum(grid_num);
+			this->moveLeft();
+			this->randIntNum();
 			break;
 		case 'D':
 		case 'd':
 		case 77: // 右方向的小键盘
-			this->moveRight(grid_num);
-			this->randIntNum(grid_num);
+			this->moveRight();
+			this->randIntNum();
 			break;
 		}
 	}

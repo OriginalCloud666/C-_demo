@@ -1,10 +1,6 @@
 ﻿#include "Model.h"
 using namespace std;
 
-auto const width = 640; // 窗口宽度
-auto const height = 720; // 窗口高度
-auto const pic_num = 12; // 图片数量
-
 IMAGE w1; // 存放文字图片
 IMAGE bk1; // 存放背景图片
 IMAGE bk2; // 存放背景图片
@@ -30,7 +26,7 @@ char s[7][5] = {//定义二维数组，用于保存多个字符串
 int main(int argc, char* argv) {
 	unique_ptr<Model> pModel(new Model()); // Model对象
 
-	pModel->load(bk1, bk2, w1, img, imgIndex, pic_width, pic_height, width, height, pic_num);
+	pModel->load(bk1, bk2, w1, img, imgIndex, pic_width, pic_height);
 	pModel->bgm();
 	initgraph(width, height);
 	pModel->welcome(bk1, w1);
@@ -40,8 +36,8 @@ int main(int argc, char* argv) {
 
 	BeginBatchDraw();
 	while (1) {
-		pModel->drawHeart(bk2, img, pic_x, pic_y, pic_num, width, width / 2, height / 4 + 10, 100, width, s, 0, 0.5, 0);
-		pModel->drawHeart(bk2, img, pic_x, pic_y, pic_num, width, width / 2, height / 4 + 10, 100, width, s, 0, 0.5, 0);
+		pModel->drawHeart(bk2, img, pic_x, pic_y, width / 2, height / 4 + 10, 100, width, s, 0, 0.5, 0);
+		pModel->drawHeart(bk2, img, pic_x, pic_y, width / 2, height / 4 + 10, 100, width, s, 0, 0.5, 0);
 		pModel->getCount()++;
 	}
 	EndBatchDraw();

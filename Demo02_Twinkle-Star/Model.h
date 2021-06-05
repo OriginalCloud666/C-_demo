@@ -7,8 +7,11 @@
 #include <conio.h>
 #include <graphics.h>
 #include <mmsystem.h>
-
 using namespace std;
+
+auto const width = 640; // 窗口宽度
+auto const height = 480; // 窗口高度
+auto const star_num = 100; // 星星总数
 
 struct Star {
 	double x; // 星星x坐标
@@ -26,10 +29,10 @@ private:
 public:
 	explicit Model() = default;
 	~Model() = default;
-	void load(IMAGE& bk, const int width, const int height); // 加载资源
+	void load(IMAGE& bk); // 加载资源
 	void bgm(); // 加载音乐
-	struct Star initStar(const int height); // 初始化星星
-	void moveStar(const int i, const int weidth, const int height); // 移动星星
-	void init(const int star_num, const int width, const int height); // 初始化数据
+	struct Star initStar(); // 初始化星星
+	void moveStar(const int i); // 移动星星
+	void init(); // 初始化数据
 	void draw(IMAGE& bk); // 绘制游戏界面
 };

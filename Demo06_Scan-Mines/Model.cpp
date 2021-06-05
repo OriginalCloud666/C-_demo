@@ -14,7 +14,7 @@ clock_t& Model::getFinish() {
 }
 
 // 加载资源
-void Model::load(IMAGE& bk, IMAGE& w1, IMAGE& w2, IMAGE& w3, IMAGE& mine, vector<IMAGE>& img, vector<int>& imgIndex, const int pic_size, const int pic_num, const int width, const int height) {
+void Model::load(IMAGE& bk, IMAGE& w1, IMAGE& w2, IMAGE& w3, IMAGE& mine, vector<IMAGE>& img, vector<int>& imgIndex) {
 	// 批量加载图片
 	for (int i = 0; i < pic_num; i++) {
 		char fileName[25];
@@ -68,7 +68,7 @@ void Model::drawAlpha(IMAGE* picture, const int  picture_x, const int picture_y)
 }
 
 // 初始化数据
-void Model::init(const int row, const int col, const int mine_num, const int pic_size, const int width, const int height) {
+void Model::init(const int row, const int col, const int mine_num) {
 	// 设置随机数种子
 	srand((unsigned)time(nullptr) * rand());
 
@@ -152,7 +152,7 @@ void Model::welcome(IMAGE& bk, IMAGE& w1, IMAGE& w2, IMAGE& w3) {
 }
 
 // 绘制游戏界面
-void Model::draw(IMAGE& bk, IMAGE& mine, vector<IMAGE>& img, const int pic_size) {
+void Model::draw(IMAGE& bk, IMAGE& mine, vector<IMAGE>& img) {
 	cleardevice();
 	putimage(0, -105, &bk);
 
@@ -210,7 +210,7 @@ void Model::openNull(const int cur_row, const int cur_col) {
 }
 
 // 鼠标消息响应
-int Model::mouseControl(const int pic_size) {
+int Model::mouseControl() {
 	// 判断是否有鼠标消息
 	if (MouseHit()) {
 		// 获取鼠标消息
@@ -286,7 +286,7 @@ out:;
 }
 
 // 判断游戏输赢
-void Model::over(IMAGE& bk, IMAGE& mine, vector<IMAGE>& img, const int pic_size, int judgeflag, const int width, const int height) {
+void Model::over(IMAGE& bk, IMAGE& mine, vector<IMAGE>& img, const int judgeflag) {
 	if (judgeflag == -2) { // 如果点击到雷则游戏结束
 		// 结束
 		for (int i = 0; i < this->row; i++) { // 游戏失败时显示所有的雷
@@ -299,7 +299,7 @@ void Model::over(IMAGE& bk, IMAGE& mine, vector<IMAGE>& img, const int pic_size,
 				}
 			}
 		}
-		this->draw(bk, mine, img, pic_size); // 重新绘制地图
+		this->draw(bk, mine, img); // 重新绘制地图
 		FlushBatchDraw();
 		this->finish = clock(); // 记录程序结束时间点
 		this->duration = ((double)this->finish - (double)this->start) / CLOCKS_PER_SEC; // 常量CLOCKS_PER_SEC用于标识每秒钟有多少个记时单元
@@ -310,7 +310,7 @@ void Model::over(IMAGE& bk, IMAGE& mine, vector<IMAGE>& img, const int pic_size,
 			mciSendString("close search", nullptr, 0, nullptr);
 			mciSendString("open ./resource/music/search.wav alias search", nullptr, 0, nullptr);
 			mciSendString("play search", nullptr, 0, nullptr);
-			this->init(this->row, this->col, this->mine_num, pic_size, width, height); // 重新对数据进行初始化
+			this->init(this->row, this->col, this->mine_num); // 重新对数据进行初始化
 			this->flag = 0;
 			this->start = clock(); // 记录开始时间点
 		}
@@ -327,7 +327,7 @@ void Model::over(IMAGE& bk, IMAGE& mine, vector<IMAGE>& img, const int pic_size,
 				}
 			}
 		}
-		this->draw(bk, mine, img, pic_size); // 重新绘制地图
+		this->draw(bk, mine, img); // 重新绘制地图
 		FlushBatchDraw();
 		this->finish = clock(); // 记录程序结束时间点
 		this->duration = ((double)this->finish - (double)this->start) / CLOCKS_PER_SEC; // 常量CLOCKS_PER_SEC用于标识每秒钟有多少个记时单元
@@ -338,7 +338,7 @@ void Model::over(IMAGE& bk, IMAGE& mine, vector<IMAGE>& img, const int pic_size,
 			mciSendString("close search", nullptr, 0, nullptr);
 			mciSendString("open ./resource/music/search.wav alias search", nullptr, 0, nullptr);
 			mciSendString("play search", nullptr, 0, nullptr);
-			this->init(this->row, this->col, this->mine_num, pic_size, width, height); // 重新对数据进行初始化
+			this->init(this->row, this->col, this->mine_num); // 重新对数据进行初始化
 			this->flag = 0;
 			this->start = clock(); // 记录开始时间点
 		}
@@ -349,20 +349,20 @@ void Model::over(IMAGE& bk, IMAGE& mine, vector<IMAGE>& img, const int pic_size,
 }
 
 // 按键响应，接收用户按键输入
-void Model::keyDown(const int map_size1, const int map_size2, const int map_size3, const int mine_num1, const int mine_num2, const int mine_num3, const int pic_size, const int width, const int height) {
+void Model::keyDown() {
 	char key = _getch(); // 用来接收用户按键
 	switch (key) {
 	case '2': // 设置高难度
-		this->init(map_size3, map_size3, mine_num3, pic_size, width, height);
+		this->init(map_size3, map_size3, mine_num3);
 		break;
 	case '1': // 设置中难度
-		this->init(map_size2, map_size2, mine_num2, pic_size, width, height);
+		this->init(map_size2, map_size2, mine_num2);
 		break;
 	case '0': // 设置低难度
-		this->init(map_size1, map_size1, mine_num1, pic_size, width, height);
+		this->init(map_size1, map_size1, mine_num1);
 		break;
 	default:
-		this->init(map_size1, map_size1, mine_num1, pic_size, width, height);
+		this->init(map_size1, map_size1, mine_num1);
 		break;
 	}
 }

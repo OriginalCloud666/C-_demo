@@ -8,8 +8,16 @@
 #include <time.h>
 #include <graphics.h>
 #include <mmsystem.h>
-
 using namespace std;
+
+auto const width = 1280; // 窗口宽度
+auto const height = 720; // 窗口高度
+auto const map_width = width * 4; // 地图宽度
+auto const map_height = height * 4; // 地图高度
+auto const food_num = 480; // 食物数量
+auto const bullet_num = 100; // 子弹数量
+auto const derived_num = 16; // 分身数量
+auto const pi = 3.1415926; // π
 
 struct Food { // 食物
 	double x; // 食物x坐标
@@ -58,24 +66,24 @@ private:
 public:
 	explicit Model() = default;
 	~Model() = default;
-	void updatePos(const int width, const int height); // 设置摄影机
+	void updatePos(); // 设置摄影机
 	void setMap(IMAGE& map); // 设置地图
 	double distance(const double x1, const double y1, const double x2, const double y2); // 求两点间距离
-	void load(IMAGE& bk, IMAGE& w1, IMAGE& w2, IMAGE& w3, const int width, const int height); // 加载资源
+	void load(IMAGE& bk, IMAGE& w1, IMAGE& w2, IMAGE& w3); // 加载资源
 	void bgm(); // 加载音乐
-	void init(const int map_width, const int map_height, const double pi, const int food_num, const int bullet_num, const int derived_num); // 初始化数据
+	void init(); // 初始化数据
 	void drawAlpha(IMAGE* picture, const int  picture_x, const int picture_y); // 载入PNG透明图片
 	void welcome(IMAGE& bk, IMAGE& w1, IMAGE& w2, IMAGE& w3); // 绘制开始界面
-	void draw(IMAGE& map, const int width, const int height, const double pi, const int food_num, const int bullet_num, const int derived_num); // 绘制游戏界面
-	void creatFood(const int i, const int map_width, const int map_height); // 产生食物
-	void eatFood(struct Role* role_, const int k, const int map_width, const int map_height, const int food_num, const int bullet_num); // 吃掉食物
-	void creatBullet(struct Role* role_, const double radian, const int bullet_num); // 产生子弹
-	void moveBullet(const int map_width, const int map_height, const int bullet_num); // 移动子弹
-	void creatRole(struct Role* role_, const double radian, const int derived_num); // 产生分身
-	void moveRole(const int map_width, const int map_height, const int derived_num); // 移动分身
-	void mixRole(struct Role* role_, const int derived_num); // 融合分身
-	void actRole(const int map_width, const int map_height, const int food_num, const int bullet_num, const int derived_num); // 角色活动
-	void keyDown1(const int map_width, const int map_height); // 按键响应（异步）
-	void keyDown2(const int bullet_num, const int derived_num); // 按键响应（同步）
-	void mouseControl(const int width, const int height, const int bullet_num, const int derived_num); // 鼠标控制
+	void draw(IMAGE& map); // 绘制游戏界面
+	void creatFood(const int i); // 产生食物
+	void eatFood(struct Role* role_, const int k); // 吃掉食物
+	void creatBullet(struct Role* role_, const double radian); // 产生子弹
+	void moveBullet(); // 移动子弹
+	void creatRole(struct Role* role_, const double radian); // 产生分身
+	void moveRole(); // 移动分身
+	void mixRole(struct Role* role_); // 融合分身
+	void actRole(); // 角色活动
+	void keyDown1(); // 按键响应（异步）
+	void keyDown2(); // 按键响应（同步）
+	void mouseControl(); // 鼠标控制
 };

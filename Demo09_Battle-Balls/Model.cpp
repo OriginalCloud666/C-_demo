@@ -2,7 +2,7 @@
 using namespace std;
 
 // 加载资源
-void Model::load(IMAGE& bk, IMAGE& w1, IMAGE& w2, IMAGE& w3, const int width, const int height) {
+void Model::load(IMAGE& bk, IMAGE& w1, IMAGE& w2, IMAGE& w3) {
 	// 加载图片
 	loadimage(&bk, "./resource/picture/bk.jpg", width, height * 1.11);
 	loadimage(&w1, "./resource/picture/w1.png", 700, 151);
@@ -56,7 +56,7 @@ double Model::distance(const double x1, const double y1, const double x2, const 
 }
 
 // 使得窗口随着玩家移动
-void Model::updatePos(const int width, const int height) {
+void Model::updatePos() {
 	// 使得玩家在窗口正中间
 	this->g_pos.x = this->roleVec[0].x - width / 2;
 	this->g_pos.y = this->roleVec[0].y - height / 2;
@@ -77,7 +77,7 @@ void Model::setMap(IMAGE& map) {
 }
 
 // 初始化游戏数据
-void Model::init(const int map_width, const int map_height, const double pi, const int food_num, const int bullet_num, const int derived_num) {
+void Model::init() {
 	// 设置随机数种子
 	srand((unsigned)time(nullptr) * rand());
 
@@ -145,7 +145,7 @@ void Model::welcome(IMAGE& bk, IMAGE& w1, IMAGE& w2, IMAGE& w3) {
 }
 
 // 绘制游戏界面
-void Model::draw(IMAGE& map, const int width, const int height, const double pi, const int food_num, const int bullet_num, const int derived_num) {
+void Model::draw(IMAGE& map) {
 	cleardevice();
 
 	// 绘图默认是绘制到窗口上的，我们要指定绘图设备
@@ -193,13 +193,13 @@ void Model::draw(IMAGE& map, const int width, const int height, const double pi,
 	}
 
 	SetWorkingImage(); // 恢复默认绘图设备——窗口
-	this->updatePos(width, height); // 更新位置
+	this->updatePos(); // 更新位置
 	putimage(0, 0, width, height, &map, g_pos.x, g_pos.y); // 对绘制后的地图进行输出
 	FlushBatchDraw(); // 双缓冲图像输出
 }
 
 // 食物被吃掉后，重新产生食物
-void Model::creatFood(const int i, const int map_width, const int map_height) {
+void Model::creatFood(const int i) {
 	this->foodVec[i].flag = true; // 将食物状态跟新为存在
 	this->foodVec[i].r = rand() % 8 + 1.0; // 设置食物大小随机
 	this->foodVec[i].x = rand() % (int)(map_width - 2 * this->foodVec[i].r) + this->foodVec[i].r;
@@ -208,7 +208,7 @@ void Model::creatFood(const int i, const int map_width, const int map_height) {
 }
 
 // 吃掉食物
-void Model::eatFood(struct Role* role, const int k, const int map_width, const int map_height, const int food_num, const int bullet_num) {
+void Model::eatFood(struct Role* role, const int k) {
 	// 食物被吃掉
 	for (int i = 0; i < food_num; i++) {
 		if (this->foodVec[i].flag == true) { // 如果食物存在
@@ -226,7 +226,7 @@ void Model::eatFood(struct Role* role, const int k, const int map_width, const i
 			}
 		}
 		else { // 如果食物不存在
-			this->creatFood(i, map_width, map_height);
+			this->creatFood(i);
 		}
 	}
 
@@ -250,7 +250,7 @@ void Model::eatFood(struct Role* role, const int k, const int map_width, const i
 }
 
 // 产生子弹
-void Model::creatBullet(struct Role* role, const double radian, const int bullet_num) {
+void Model::creatBullet(struct Role* role, const double radian) {
 	for (int i = 0; i < bullet_num; i++) {
 		if (this->bullVec[i].flag == false) { // 如果子弹不存在则创造子弹
 			this->bullVec[i].flag = true;
@@ -269,7 +269,7 @@ void Model::creatBullet(struct Role* role, const double radian, const int bullet
 }
 
 // 子弹的移动
-void Model::moveBullet(const int map_width, const int map_height, const int bullet_num) {
+void Model::moveBullet() {
 	for (int i = 0; i < bullet_num; i++) {
 		if (this->bullVec[i].flag == true) { // 存在的子弹是可以移动的
 			if (this->bullVec[i].shootstep <= 0) {
@@ -288,7 +288,7 @@ void Model::moveBullet(const int map_width, const int map_height, const int bull
 }
 
 // 分身实现
-void Model::creatRole(struct Role* role, const double radian, const int derived_num) {
+void Model::creatRole(struct Role* role, const double radian) {
 	for (int i = 1; i < derived_num; i++) {
 		if (this->roleVec[i].flag == false) {//如果玩家分身不存在则创造分身
 			this->roleVec[i].flag = true;
@@ -309,7 +309,7 @@ void Model::creatRole(struct Role* role, const double radian, const int derived_
 }
 
 // 分身移动
-void Model::moveRole(const int map_width, const int map_height, const int derived_num) {
+void Model::moveRole() {
 	for (int i = 1; i < derived_num; i++) {
 		if (this->roleVec[i].flag == true) { // 存在的玩家分身是可以移动的
 			if (this->roleVec[i].shootstep <= 0) {
@@ -331,7 +331,7 @@ void Model::moveRole(const int map_width, const int map_height, const int derive
 }
 
 // 分身融合
-void Model::mixRole(struct Role* role, const int derived_num) {
+void Model::mixRole(struct Role* role) {
 	// 玩家分身与玩家的融合
 	for (int i = 1; i < derived_num; i++) {
 		if (this->roleVec[i].flag == true) { // 如果玩家或分身存在
@@ -352,17 +352,17 @@ void Model::mixRole(struct Role* role, const int derived_num) {
 }
 
 // 角色活动
-void Model::actRole(const int map_width, const int map_height, const int food_num, const int bullet_num, const int derived_num) {
+void Model::actRole() {
 	for (int i = 0; i < derived_num; i++) {
 		if (this->roleVec[i].flag == true) {//存在的玩家或分身可以吃食物
-			this->eatFood(&this->roleVec[i], i, map_width, map_height, food_num, bullet_num);
+			this->eatFood(&this->roleVec[i], i);
 		}
 	}
-	this->mixRole(&this->roleVec[0], derived_num);
+	this->mixRole(&this->roleVec[0]);
 }
 
 // 玩家移动（异步按键控制）
-void Model::keyDown1(const int map_width, const int map_height) {
+void Model::keyDown1() {
 	// 判断当前Windows前台应用程序活动窗口是否为当前easyx绘图窗口
 	if (GetForegroundWindow() == GetHWnd()) {
 		if ((GetAsyncKeyState(VK_UP) || GetAsyncKeyState('W'))) { // 检测上键
@@ -421,7 +421,7 @@ void Model::keyDown1(const int map_width, const int map_height) {
 }
 
 // 玩家功能（同步按键控制）
-void Model::keyDown2(const int bullet_num, const int derived_num) {
+void Model::keyDown2() {
 	// 接收用户信息
 	char key;
 	// 判断是否有键盘消息
@@ -434,7 +434,7 @@ void Model::keyDown2(const int bullet_num, const int derived_num) {
 		case'u':
 			for (int i = 0; i < derived_num; i++) {
 				if (this->roleVec[i].flag == true && this->roleVec[i].r > 25) {
-					this->creatBullet(&this->roleVec[i], this->roleVec[0].radian, bullet_num);
+					this->creatBullet(&this->roleVec[i], this->roleVec[0].radian);
 				}
 			}
 			break;
@@ -443,7 +443,7 @@ void Model::keyDown2(const int bullet_num, const int derived_num) {
 		case'i':
 			for (int i = derived_num - 1; i >= 0; i--) {
 				if (this->roleVec[i].flag == true && this->roleVec[i].r > 60) {
-					this->creatRole(&this->roleVec[i], this->roleVec[0].radian, derived_num);
+					this->creatRole(&this->roleVec[i], this->roleVec[0].radian);
 				}
 			}
 			break;
@@ -452,7 +452,7 @@ void Model::keyDown2(const int bullet_num, const int derived_num) {
 }
 
 // 鼠标操作
-void Model::mouseControl(const int width, const int height, const int bullet_num, const int derived_num) {
+void Model::mouseControl() {
 	// 判断是否有鼠标消息
 	if (MouseHit()) {
 		// 获取鼠标消息
@@ -465,7 +465,7 @@ void Model::mouseControl(const int width, const int height, const int bullet_num
 		if (msg.uMsg == WM_LBUTTONDOWN) {
 			for (int i = 0; i < derived_num; i++) {
 				if (this->roleVec[i].flag == true && this->roleVec[i].r > 25) {
-					this->creatBullet(&this->roleVec[i], this->roleVec[0].radian, bullet_num);
+					this->creatBullet(&this->roleVec[i], this->roleVec[0].radian);
 				}
 			}
 		}
@@ -473,7 +473,7 @@ void Model::mouseControl(const int width, const int height, const int bullet_num
 		if (msg.uMsg == WM_RBUTTONDOWN) {
 			for (int i = derived_num - 1; i >= 0; i--) {
 				if (this->roleVec[i].flag == true && this->roleVec[i].r > 60) {
-					this->creatRole(&this->roleVec[i], this->roleVec[0].radian, derived_num);
+					this->creatRole(&this->roleVec[i], this->roleVec[0].radian);
 				}
 			}
 		}

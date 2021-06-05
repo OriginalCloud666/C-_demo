@@ -1,7 +1,7 @@
 #include "Model.h"
 using namespace std;
 
-Model::Model(const int pic_width, const int pic_height, const int width) :flag(0) {
+Model::Model() :flag(0) {
 	this->img_ptr1 = nullptr;
 	this->img_ptr2 = nullptr;
 	this->buf = new short[pic_height * width + pic_width];
@@ -16,7 +16,7 @@ Model::~Model() {
 }
 
 // 加载资源
-void Model::load(IMAGE& src_img, const int pic_width, const int pic_height) {
+void Model::load(IMAGE& src_img) {
 	loadimage(&src_img, "./resource/picture/bk.jpg", pic_width, pic_height);
 }
 
@@ -27,7 +27,7 @@ void Model::bgm() {
 }
 
 // 初始化数据
-void Model::init(IMAGE& src_img, IMAGE& dest_img, const int pic_width, const int pic_height) {
+void Model::init(IMAGE& src_img, IMAGE& dest_img) {
 	setbkmode(TRANSPARENT);
 	SetWindowText(GetHWnd(), "C++律动波纹");
 
@@ -41,7 +41,7 @@ void Model::init(IMAGE& src_img, IMAGE& dest_img, const int pic_width, const int
 }
 
 // 计算下一个时刻所有点的波幅
-void Model::nextFrame(const int damp, const int pic_width, const int pic_height, const int width) {
+void Model::nextFrame(const int damp) {
 	for (int i = pic_width; i < pic_height * (pic_width - 1); i++) {
 		// 计算下一时刻所有点的波幅
 		this->buf2[i] = ((this->buf[i - pic_width] + this->buf[i + pic_width] + this->buf[i - 1] + this->buf[i + 1]) >> 1) - this->buf2[i];
@@ -56,7 +56,7 @@ void Model::nextFrame(const int damp, const int pic_width, const int pic_height,
 }
 
 // 处理当前时刻波幅影响之后的位图
-void Model::renderRipple(const int pic_width, const int pic_height) {
+void Model::renderRipple() {
 	int i = 0;
 	for (int y = 0; y < pic_height; y++) {
 		for (int x = 0; x < pic_width; x++) {
@@ -80,7 +80,7 @@ void Model::renderRipple(const int pic_width, const int pic_height) {
 }
 
 // 鼠标模拟投石头
-void Model::disturb(const int x, const int y, const int stonesize, const int stoneweight, const int pic_width, const int pic_height) {
+void Model::disturb(const int x, const int y, const int stonesize, const int stoneweight) {
 	// 突破边界不处理
 	if ((x >= pic_width - stonesize) ||
 		(x < stonesize) ||
@@ -100,7 +100,7 @@ void Model::disturb(const int x, const int y, const int stonesize, const int sto
 }
 
 // 计算帧率FPS
-float Model::getFps(const int fps_count) {
+float Model::getFps() {
 	// 静态本地变量：具有全局的生存期和函数内部局部的作用域
 	static int i = 0;
 	static int oldTime = GetTickCount64();
@@ -118,8 +118,8 @@ float Model::getFps(const int fps_count) {
 }
 
 // 画面渲染
-void Model::renderFun(IMAGE& dest_img, const int pic_width, const int pic_height, const int fps_count) {
-	this->renderRipple(pic_width, pic_height);
+void Model::renderFun(IMAGE& dest_img) {
+	this->renderRipple();
 	putimage(0, -135, &dest_img);
 
 	settextcolor(RGB(210, 210, 210));
@@ -131,37 +131,37 @@ void Model::renderFun(IMAGE& dest_img, const int pic_width, const int pic_height
 	outtextxy(15, 50, "作者：初云");
 
 	TCHAR s[20]; // 定义数组，用于以字符形式存放FPS帧率
-	_stprintf(s, "FPS: %.1f", getFps(fps_count));
+	_stprintf(s, "FPS: %.1f", getFps());
 	settextcolor(RGB(210, 210, 210));
 	settextstyle(20, 0, "Times New Roman", 0, 0, 800, 0, 0, 0);
 	outtextxy(28, 80, s);
 }
 
 // 画面逻辑
-void Model::frameFun(const int pic_width, const int pic_height, const int width, const int height) {
+void Model::frameFun() {
 	if (MouseHit()) {
 		// 获取鼠标消息
 		MOUSEMSG msg = GetMouseMsg();
 		if (msg.uMsg == WM_MOUSEMOVE) {
 			// 调整石头入水后初始波幅范围（石头大小），以及初始波幅大小（石头重量）
-			this->disturb(msg.x, msg.y + 135, 3, 256, pic_width, pic_height);
+			this->disturb(msg.x, msg.y + 135, 3, 256);
 			this->flag = 1;
 		}
 		else if (msg.uMsg == WM_LBUTTONDOWN) {
 			// 调整石头入水后初始波幅范围（石头大小），以及初始波幅大小（石头重量）
-			disturb(msg.x, msg.y + 135, 3, 2560 / 5 * 4, pic_width, pic_height);
+			disturb(msg.x, msg.y + 135, 3, 2560 / 5 * 4);
 			flag = 2;
 		}
 		else if (msg.uMsg == WM_RBUTTONDOWN) {
 			// 调整石头入水后初始波幅范围（石头大小），以及初始波幅大小（石头重量）
-			disturb(msg.x, msg.y + 135, 100, 256, pic_width, pic_height);
+			disturb(msg.x, msg.y + 135, 100, 256);
 			flag = 3;
 		}
 		else if (msg.uMsg == WM_MOUSEWHEEL) {
 			for (int i = 0; i < width; i += 50) {
 				for (int j = 0; j < height; j += 50) {
 					// 调整石头入水后初始波幅范围（石头大小），以及初始波幅大小（石头重量）
-					disturb(i, j + 135, 3, 256, pic_width, pic_height);
+					disturb(i, j + 135, 3, 256);
 				}
 			}
 			this->flag = 4;
@@ -171,19 +171,19 @@ void Model::frameFun(const int pic_width, const int pic_height, const int width,
 
 	switch (flag) {
 	case 1:
-		nextFrame(5, pic_width, pic_height, width);
+		nextFrame(5);
 		break;
 	case 2:
-		nextFrame(10, pic_width, pic_height, width);
+		nextFrame(10);
 		break;
 	case 3:
-		nextFrame(5, pic_width, pic_height, width);
+		nextFrame(5);
 		break;
 	case 4:
-		nextFrame(5, pic_width, pic_height, width);
+		nextFrame(5);
 		break;
 	default:
-		nextFrame(5, pic_width, pic_height, width);
+		nextFrame(5);
 		break;
 	}
 }

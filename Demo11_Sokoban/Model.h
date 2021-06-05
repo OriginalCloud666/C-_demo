@@ -6,8 +6,13 @@
 #include <conio.h>
 #include <graphics.h>
 #include <mmsystem.h>
-
 using namespace std;
+
+auto const width = 640; // 窗口宽度
+auto const height = 720; // 窗口高度
+auto const pic_num = 10; // 图片数量
+auto const pic_size = 50; // 图片大小
+auto const grid_num = 8; // 地图行列
 
 //-------推箱子游戏类模型--------//
 
@@ -23,13 +28,13 @@ public:
 	explicit Model();
 	~Model() = default;
 	int& getFlag();
-	void load(IMAGE& bk, vector<IMAGE>& img, vector<int>& imgIndex, const int pic_num, const int pic_size, const int width, const int height); // 加载资源
+	void load(IMAGE& bk, vector<IMAGE>& img, vector<int>& imgIndex); // 加载资源
 	void bgm(); // 加载音乐
-	void init(const int width, const int height, const int grid_num, const int pic_size); // 初始化数据
+	void init(); // 初始化数据
 	void welcome(IMAGE& bk); // 绘制开始界面
-	void draw(IMAGE& bk, vector<IMAGE>& img, const int grid_num, const int pic_size); // 绘制游戏界面
+	void draw(IMAGE& bk, vector<IMAGE>& img); // 绘制游戏界面
 	void changOne(const int i, const int j); // 更改玩家位置
-	void keyDown(const int grid_num); // 按键响应
-	int over(const int grid_num); // 游戏结束判断
-	void action(IMAGE& bk, vector<IMAGE>& img, const int grid_num, const int pic_size, const int width, const int height); // 结束动画
+	void keyDown(); // 按键响应
+	int over(); // 游戏结束判断
+	void action(IMAGE& bk, vector<IMAGE>& img); // 结束动画
 };

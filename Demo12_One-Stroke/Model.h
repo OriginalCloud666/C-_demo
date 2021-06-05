@@ -6,8 +6,13 @@
 #include <conio.h>
 #include <graphics.h>
 #include <mmsystem.h>
-
 using namespace std;
+
+auto const width = 640; // 窗口宽度
+auto const height = 720; // 窗口高度
+auto const grid_size = 50; // 格子大小
+auto const grid_num = 10; // 地图行列
+auto const point_num = 100; // 记录位置点的数量
 
 enum Tools {
 	BLANK = 0, // 空地用0表示
@@ -56,17 +61,17 @@ public:
 	vector<Point>& getPoint(); // 获取point
 	void load(IMAGE& bk, IMAGE& w1, IMAGE& w2); // 加载资源
 	void bgm(); // 加载音乐
-	void init(const int width, const int height, const int grid_num, const int grid_size, const int point_num); // 初始化数据
-	void pointInit(const int grid_num); // 位置信息点的初始化
+	void init(); // 初始化数据
+	void pointInit(); // 位置信息点的初始化
 	void drawAlpha(IMAGE* picture, const int  picture_x, const int picture_y); // 载入PNG图片
 	void welcome(IMAGE& bk, IMAGE& w1, IMAGE& w2); // 绘制开始界面
-	void draw(const int grid_num, const int grid_size); // 绘制游戏界面
-	void drawRole(const double x, const double y, const int border_size, const int grid_num); // 角色绘制
-	void drawWall(const double x, const double y, const int grid_size); // 墙壁绘制
-	void drawLine(struct Point* begin, struct Point* end, const int grid_size); // 画线过程
-	void searchRolePos(const int grid_num); // 寻找角色位置
+	void draw(); // 绘制游戏界面
+	void drawRole(const double x, const double y, const int border_size); // 角色绘制
+	void drawWall(const double x, const double y); // 墙壁绘制
+	void drawLine(struct Point* begin, struct Point* end); // 画线过程
+	void searchRolePos(); // 寻找角色位置
 	int roleStop(const int dir); // 移动标准判断
 	void moveRole(const int dir); // 角色移动
 	void keyDown(); // 按键消息响应
-	bool over(const int grid_num); // 结束条件判断
+	bool over(); // 结束条件判断
 };

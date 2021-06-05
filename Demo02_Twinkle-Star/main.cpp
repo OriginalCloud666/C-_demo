@@ -1,10 +1,6 @@
 ﻿#include "Model.h"
 using namespace std;
 
-auto const width = 640; // 窗口宽度
-auto const height = 480; // 窗口高度
-auto const star_num = 100; // 星星总数
-
 IMAGE bk; // 存放背景图片
 
 //-------The main method--------//
@@ -12,11 +8,11 @@ IMAGE bk; // 存放背景图片
 int main(int argc, char* argv) {
 	unique_ptr<Model> pModel(new Model()); // Model对象
 
-	pModel->load(bk, width, height);
+	pModel->load(bk);
 	pModel->bgm();
 	initgraph(width, height);
 	pModel->draw(bk);
-	pModel->init(star_num, height, width);
+	pModel->init();
 
 	fflush(stdin); // 清空键盘消息缓冲区
 	FlushMouseMsgBuffer(); // 清空鼠标消息缓冲区
@@ -27,7 +23,7 @@ int main(int argc, char* argv) {
 		pModel->draw(bk);
 
 		for (int i = 0; i < star_num; i++) {
-			pModel->moveStar(i, width, height);
+			pModel->moveStar(i);
 		}
 		Sleep(10);
 		FlushBatchDraw();

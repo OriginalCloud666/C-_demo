@@ -7,8 +7,19 @@
 #include <time.h>
 #include <graphics.h>
 #include <mmsystem.h>
-
 using namespace std;
+
+auto const width = 640; // 窗口宽度
+auto const height = 720; // 窗口高度
+auto const pic_size = 32; // 图片大小
+auto const pic_num = 12; // 图片数量
+
+auto const map_size1 = 9; // 地图大小（小）
+auto const map_size2 = 13; // 地图大小（中）
+auto const map_size3 = 17; // 地图大小（大）
+auto const mine_num1 = 10; // 地雷数量（少）
+auto const mine_num2 = 26; // 地雷数量（中）
+auto const mine_num3 = 47; // 地雷数量（多）
 
 //-------扫雷游戏类模型--------//
 
@@ -31,14 +42,14 @@ public:
 	~Model() = default;
 	clock_t& getStart();
 	clock_t& getFinish();
-	void load(IMAGE& bk, IMAGE& w1, IMAGE& w2, IMAGE& w3, IMAGE& mine, vector<IMAGE>& img, vector<int>& imgIndex, const int pic_size, const int pic_num, const int width, const int height); // 加载资源
+	void load(IMAGE& bk, IMAGE& w1, IMAGE& w2, IMAGE& w3, IMAGE& mine, vector<IMAGE>& img, vector<int>& imgIndex); // 加载资源
 	void bgm(); // 加载音乐
-	void init(const int row, const int col, const int mine_num, const int pic_size, const int width, const int height); // 初始化数据
+	void init(const int row, const int col, const int mine_num); // 初始化数据
 	void drawAlpha(IMAGE* picture, const int  picture_x, const int picture_y); // 载入PNG透明图片
 	void welcome(IMAGE& bk, IMAGE& w1, IMAGE& w2, IMAGE& w3); // 绘制开始界面
-	void draw(IMAGE& bk, IMAGE& mine, vector<IMAGE>& img, const int pic_size); // 绘制游戏界面
+	void draw(IMAGE& bk, IMAGE& mine, vector<IMAGE>& img); // 绘制游戏界面
 	void openNull(const int cur_row, const int cur_col); // 打开空格周围格子
-	int mouseControl(const int pic_size); // 鼠标消息响应
-	void keyDown(const int map_size1, const int map_size2, const int map_size3, const int mine_num1, const int mine_num2, const int mine_num3, const int pic_size, const int width, const int height); // 键盘消息响应
-	void over(IMAGE& bk, IMAGE& mine, vector<IMAGE>& img, const int pic_size, int flag, const int width, const int height); // 游戏结束判断
+	int mouseControl(); // 鼠标消息响应
+	void keyDown(); // 键盘消息响应
+	void over(IMAGE& bk, IMAGE& mine, vector<IMAGE>& img, const int judgeflag); // 游戏结束判断
 };

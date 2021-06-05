@@ -4,7 +4,7 @@ using namespace std;
 Model::Model() :top(0), left(0), down(0), right(0) {}
 
 // 加载资源
-void Model::load(IMAGE& bk, IMAGE& white, const int width, const int height) {
+void Model::load(IMAGE& bk, IMAGE& white) {
 	// 加载图片
 	loadimage(&bk, "./resource/picture/bk.jpg", width, height);
 	loadimage(&white, "./resource/picture/white.jpg", 533, 300);
@@ -17,7 +17,7 @@ void Model::bgm() {
 }
 
 // 初始化游戏数据
-void Model::init(const int width, const int height, const int grid_num, const int grid_width, const int grid_height) {
+void Model::init() {
 	// 设置随机数种子
 	srand((unsigned)time(nullptr) * rand());
 
@@ -67,7 +67,7 @@ void Model::welcome(IMAGE& bk) {
 }
 
 // 绘制游戏界面
-void Model::draw(IMAGE& bk, IMAGE& white, const int grid_num, const int grid_width, const int grid_height) {
+void Model::draw(IMAGE& bk, IMAGE& white) {
 	cleardevice();
 
 	// 游戏界面绘制贴图
@@ -86,7 +86,7 @@ void Model::draw(IMAGE& bk, IMAGE& white, const int grid_num, const int grid_wid
 }
 
 // 定位白块i
-int Model::searchArray_i(const int grid_num) {
+int Model::searchArray_i() {
 	for (int i = 0; i < grid_num; i++) {
 		for (int j = 0; j < grid_num; j++) {
 			if (this->gameMapVec[i][j] == 15) {
@@ -98,7 +98,7 @@ int Model::searchArray_i(const int grid_num) {
 }
 
 // 定位白块j
-int Model::searchArray_j(const int grid_num) {
+int Model::searchArray_j() {
 	for (int i = 0; i < grid_num; i++) {
 		for (int j = 0; j < grid_num; j++) {
 			if (this->gameMapVec[i][j] == 15) {
@@ -110,7 +110,7 @@ int Model::searchArray_j(const int grid_num) {
 }
 
 // 鼠标控制
-void Model::mouseControl(const int grid_num, const int grid_width, const int grid_height) {
+void Model::mouseControl() {
 	if (MouseHit()) { // 判断是否有鼠标消息
 		MOUSEMSG msg = GetMouseMsg();
 		// 判断用户点击的是否是游戏区域
@@ -120,8 +120,8 @@ void Model::mouseControl(const int grid_num, const int grid_width, const int gri
 			int row = (msg.y - this->top) / grid_height; // 行
 			int col = (msg.x - this->left) / grid_width; // 列
 			// 搜寻获取白块的横纵坐标
-			int white_i = this->searchArray_i(grid_num);
-			int white_j = this->searchArray_j(grid_num);
+			int white_i = this->searchArray_i();
+			int white_j = this->searchArray_j();
 			// 对鼠标消息进行分发
 			switch (msg.uMsg) {
 			case WM_LBUTTONDOWN: // 鼠标左键点击
@@ -151,7 +151,7 @@ void Model::mouseControl(const int grid_num, const int grid_width, const int gri
 }
 
 // 游戏结束判断
-bool Model::over(const int grid_num) {
+bool Model::over() {
 	int count = 0;
 	for (int i = 0; i < grid_num; i++) {
 		for (int j = 0; j < grid_num; j++) {

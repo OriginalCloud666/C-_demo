@@ -26,7 +26,7 @@ char Model::createChar() {
 }
 
 // 初始化数据
-void Model::init(const int str_num, const int str_size, const int str_width, const int height) {
+void Model::init() {
 	SetWindowText(GetHWnd(), "C++黑客帝国数字雨");
 	// 设置随机数种子
 	srand((unsigned)time(nullptr) * rand());
@@ -45,14 +45,14 @@ void Model::init(const int str_num, const int str_size, const int str_width, con
 }
 
 // 让数字雨不断变化
-void Model::rainChange(const int str_num, const int str_size) {
+void Model::rainChange() {
 	for (int i = 0; i < str_num; i++) {
 		this->rainVec[rand() % str_num].str[rand() % str_size] = this->createChar();
 	}
 }
 
 // 让数字雨不断下落
-void Model::rainMove(const int str_num, const int str_size, const int str_width, const int height) {
+void Model::rainMove() {
 	// 让数字雨下落
 	for (int i = 0; i < str_num; i++) {
 		this->rainVec[i].y += this->rainVec[i].step;
@@ -65,7 +65,7 @@ void Model::rainMove(const int str_num, const int str_size, const int str_width,
 }
 
 // 输出字符到绘图窗口
-void Model::printChar(const int str_num, const int str_size, const int str_width) {
+void Model::printChar() {
 	// 清空屏幕
 	cleardevice();
 	// 设置字体格式

@@ -2,7 +2,7 @@
 using namespace std;
 
 // 加载资源
-void Model::load(IMAGE& bk, int width, int height) {
+void Model::load(IMAGE& bk) {
 	loadimage(&bk, "./resource/picture/bk.jpg", width * 1.035, height * 1.02);
 }
 
@@ -13,7 +13,7 @@ void Model::bgm() {
 }
 
 // 初始化星星
-struct Star Model::initStar(const int height) {
+struct Star Model::initStar() {
 	struct Star newstar;
 	newstar.x = 0;
 	newstar.y = rand() % height; // 星星的变换在整个界面进行
@@ -27,10 +27,10 @@ struct Star Model::initStar(const int height) {
 }
 
 // 移动星星
-void Model::moveStar(const int i, const int width, const int height) {
+void Model::moveStar(const int i) {
 	this->startVec[i].x += this->startVec[i].step;
 	if (this->startVec[i].x > width) {
-		this->startVec[i] = Model::initStar(height);
+		this->startVec[i] = Model::initStar();
 	}
 
 	// 绘制新的星星
@@ -39,13 +39,13 @@ void Model::moveStar(const int i, const int width, const int height) {
 }
 
 // 初始化数据
-void Model::init(const int star_num, const int width, const int height) {
+void Model::init() {
 	// 设置随机数种子
 	srand((unsigned)time(nullptr));
 
 	// 初始化所有星星
 	for (int i = 0; i < star_num; i++) {
-		this->startVec.push_back(initStar(height));
+		this->startVec.push_back(initStar());
 		this->startVec[i].x = rand() % width;
 	}
 }

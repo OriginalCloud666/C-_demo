@@ -11,7 +11,7 @@ Model::Model() :score(0), speed(0), bullet_num(0) {
 }
 
 // 加载资源
-void Model::load(IMAGE& bk, IMAGE& w1, IMAGE& w2, IMAGE& w3, IMAGE& w4, const int width, const int height) {
+void Model::load(IMAGE& bk, IMAGE& w1, IMAGE& w2, IMAGE& w3, IMAGE& w4) {
 	loadimage(&bk, "./resource/picture/bk.jpg", width, height * 1.58);
 	loadimage(&w1, "./resource/picture/w1.png", 850, 142);
 	loadimage(&w2, "./resource/picture/w2.png", 500, 83);
@@ -59,7 +59,7 @@ void Model::drawAlpha(IMAGE* picture, const int  picture_x, const int picture_y)
 }
 
 // 初始化数据
-void Model::init(const int bull_num, const int balloon_num, const int width, const int height) {
+void Model::init() {
 	// 设置随机数种子
 	srand((unsigned)time(nullptr) * rand());
 
@@ -123,7 +123,7 @@ void Model::welcome(IMAGE& bk, IMAGE& w1, IMAGE& w2, IMAGE& w3, IMAGE& w4) {
 }
 
 //游戏界面绘制
-void Model::draw(IMAGE& bk, const int bull_num, const int balloon_num, const int height) {
+void Model::draw(IMAGE& bk) {
 	cleardevice();//清屏
 	putimage(0, -182, &bk);
 
@@ -199,7 +199,7 @@ void Model::draw(IMAGE& bk, const int bull_num, const int balloon_num, const int
 }
 
 // 产生子弹
-void Model::creatBullet(const int bull_num) {
+void Model::creatBullet() {
 	for (int i = 0; i < bull_num; i++) {
 		if (this->bullVec[i].flag == false) { // 如果子弹不存在，则创造子弹
 			this->bullVec[i].flag = true;
@@ -215,7 +215,7 @@ void Model::creatBullet(const int bull_num) {
 }
 
 // 加速子弹
-void Model::speedBullet(const int bull_num) {
+void Model::speedBullet() {
 	mciSendString("close up", nullptr, 0, nullptr);
 	mciSendString("open ./resource/music/up.wav alias up", nullptr, 0, nullptr);
 	mciSendString("play up", nullptr, 0, nullptr);
@@ -229,7 +229,7 @@ void Model::speedBullet(const int bull_num) {
 }
 
 // 填充子弹
-void Model::fillBullet(const int bull_num, const int width, const int height) {
+void Model::fillBullet() {
 	mciSendString("close fill", nullptr, 0, nullptr);
 	mciSendString("open ./resource/music/fillbullet.mp3 alias fill", nullptr, 0, nullptr);
 	mciSendString("play fill", nullptr, 0, nullptr);
@@ -249,7 +249,7 @@ void Model::fillBullet(const int bull_num, const int width, const int height) {
 }
 
 // 子弹的移动
-void Model::moveBullet(const int bull_num) {
+void Model::moveBullet() {
 	for (int i = 0; i < bull_num; i++) {
 		if (this->bullVec[i].flag == true) { // 存在的子弹是可以移动的
 			this->bullVec[i].x += this->bullVec[i].vx;
@@ -259,7 +259,7 @@ void Model::moveBullet(const int bull_num) {
 }
 
 // 产生气球
-void Model::creatBalloon(const int i, const int width, const int height) {
+void Model::creatBalloon(const int i) {
 	this->ballVec[i].x = rand() % width - 18.0; // 设置气球x坐标（确保x坐标表示的是气球中点x坐标）
 	this->ballVec[i].y = height; // 设置气球y坐标（确保y坐标表示的是气球中点的y坐标）
 	this->ballVec[i].step = (rand() % 500) / 1000.0 + 0.6; // 设置气球每次的位移
@@ -268,7 +268,7 @@ void Model::creatBalloon(const int i, const int width, const int height) {
 }
 
 // 气球碰撞击破
-void Model::crashBalloon(const int bull_num, const int balloon_num, const int width, const int height) {
+void Model::crashBalloon() {
 	// 遍历气球
 	for (int i = 0; i < balloon_num; i++) {
 		if (this->ballVec[i].flag == true) {
@@ -284,7 +284,7 @@ void Model::crashBalloon(const int bull_num, const int balloon_num, const int wi
 					this->bullVec[k].y = -height; // 碰撞之后子弹消失（纵坐标上移至界面外）
 					this->ballVec[i].flag = false; // 碰撞之后气球消失
 					this->score++; // 气球爆炸后，得分加一
-					this->creatBalloon(i, width, height); // 气球碰撞消失后产生新的气球
+					this->creatBalloon(i); // 气球碰撞消失后产生新的气球
 				}
 			}
 		}
@@ -292,20 +292,20 @@ void Model::crashBalloon(const int bull_num, const int balloon_num, const int wi
 }
 
 // 气球的移动
-void Model::moveBalloon(const int balloon_num, const int width, const int height) {
+void Model::moveBalloon() {
 	for (int i = 0; i < balloon_num; i++) {
 		if (this->ballVec[i].flag == true) {
 			this->ballVec[i].y -= this->ballVec[i].step;
 			if (this->ballVec[i].y < -55) {
 				this->ballVec[i].flag = false; // 气球飞出界面后，将气球视作false
-				this->creatBalloon(i, width, height);
+				this->creatBalloon(i);
 			}
 		}
 	}
 }
 
 // 鼠标消息响应
-void Model::mouseControl(const int bull_num, const int width, const int height) {
+void Model::mouseControl() {
 	// 判断是否有鼠标消息
 	if (MouseHit()) {
 		// 获取鼠标信息
@@ -315,21 +315,21 @@ void Model::mouseControl(const int bull_num, const int width, const int height) 
 		this->bat.y = this->bat.cy + sin(bat.radian) * this->bat.len;
 		// 如果左键按下，发射子弹
 		if (msg.uMsg == WM_LBUTTONDOWN) {
-			this->creatBullet(bull_num);
+			this->creatBullet();
 		}
 		// 如果右键按下，加速子弹
 		if (msg.uMsg == WM_RBUTTONDOWN) {
-			this->speedBullet(bull_num);
+			this->speedBullet();
 		}
 		// 如果滑轮滚动，填充子弹
 		if (msg.uMsg == WM_MOUSEWHEEL) {
-			this->fillBullet(bull_num, width, height);
+			this->fillBullet();
 		}
 	}
 }
 
 // 键盘消息响应（同步响应）
-void Model::keyDown(const int bull_num, const int width, const int height) {
+void Model::keyDown() {
 	// 用来接收用户按键
 	char key;
 	// 判断是否有键盘消息
@@ -341,24 +341,24 @@ void Model::keyDown(const int bull_num, const int width, const int height) {
 		case'W':
 		case'w':
 		case 72:
-			this->speedBullet(bull_num);
+			this->speedBullet();
 			break;
 			// 下方向键进行子弹的填充
 		case'S':
 		case's':
 		case 80:
-			this->fillBullet(bull_num, width, height);
+			this->fillBullet();
 			break;
 			// 空格键来进行子弹的发射
 		case' ':
-			this->creatBullet(bull_num);
+			this->creatBullet();
 			break;
 		}
 	}
 }
 
 // 按键异步响应
-void Model::keyDown2(const double barrel_speed) {
+void Model::keyDown2() {
 	if (GetForegroundWindow() == GetHWnd()) {
 		// 判断当前Windows前台窗口是否为当前绘图窗口
 		if ((GetAsyncKeyState(VK_LEFT) || GetAsyncKeyState('A')) && 0x8000) { // 检测左键

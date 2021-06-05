@@ -113,7 +113,7 @@ void Model::drawAlpha(IMAGE* picture, const int  picture_x, const int picture_y)
 }
 
 // 初始化游戏数据
-void Model::init(const int width, const int height, const int grid_num, const int grid_size, const int point_num) {
+void Model::init() {
 	// 初始化游戏区域坐标
 	this->left = width / 2 - (grid_num * grid_size) / 2;
 	this->top = height / 2 - (grid_num * grid_size) / 2;
@@ -128,7 +128,7 @@ void Model::init(const int width, const int height, const int grid_num, const in
 }
 
 // 绘制内含白色矩形的填充矩形（角色）
-void Model::drawRole(const double x, const double y, const int border_size, const int grid_size) {
+void Model::drawRole(const double x, const double y, const int border_size) {
 	// 填充外部颜色
 	setfillcolor(RGB(40, 39, 96));
 	solidrectangle(x, y, x + grid_size, y + grid_size);
@@ -139,7 +139,7 @@ void Model::drawRole(const double x, const double y, const int border_size, cons
 }
 
 // 绘制橙色矩形（墙壁）
-void Model::drawWall(const double x, const double y, const int grid_size) {
+void Model::drawWall(const double x, const double y) {
 	// 绘制带边框的矩形
 	setlinecolor(RGB(240, 240, 240));
 	setlinestyle(PS_SOLID, 1);
@@ -148,7 +148,7 @@ void Model::drawWall(const double x, const double y, const int grid_size) {
 }
 
 // 画线的过程
-void Model::drawLine(struct Point* begin, struct Point* end, const int grid_size) {
+void Model::drawLine(struct Point* begin, struct Point* end) {
 	// 将数组下标转化为坐标
 	const int bx = this->left + begin->col * grid_size + grid_size / 2;
 	const int by = this->top + begin->row * grid_size + grid_size / 2;
@@ -174,7 +174,7 @@ void Model::welcome(IMAGE& bk, IMAGE& w1, IMAGE& w2) {
 }
 
 // 绘制游戏界面
-void Model::draw(const int grid_num, const int grid_size) {
+void Model::draw() {
 	cleardevice();
 
 	// 输出作者信息
@@ -210,13 +210,13 @@ void Model::draw(const int grid_num, const int grid_size) {
 			case BLANK:
 				break;
 			case WALL:
-				this->drawWall(x, y, grid_size);
+				this->drawWall(x, y);
 				break;
 			case ROLE:
-				this->drawRole(x, y, grid_size / 5, grid_size);
+				this->drawRole(x, y, grid_size / 5);
 				break;
 			case BOARD:
-				this->drawRole(x, y, 1, grid_size);
+				this->drawRole(x, y, 1);
 				break;
 			}
 		}
@@ -224,7 +224,7 @@ void Model::draw(const int grid_num, const int grid_size) {
 }
 
 // 找寻角色位置
-void Model::searchRolePos(const int grid_num) {
+void Model::searchRolePos() {
 	for (int i = 0; i < grid_num; i++) {
 		for (int j = 0; j < grid_num; j++) {
 			if (this->gameMapVec[this->flag][i][j] == ROLE) {
@@ -238,13 +238,13 @@ void Model::searchRolePos(const int grid_num) {
 }
 
 // 记录位置信息的点的初始化
-void Model::pointInit(const int grid_num) {
+void Model::pointInit() {
 	// 初始化vector容器
 	for (vector<Point>::iterator iter = this->point.begin(); iter != this->point.end(); iter++) {
 		*iter = { 0, 0 };
 	}
 	// 获取玩家的坐标位置
-	this->searchRolePos(grid_num);
+	this->searchRolePos();
 	// 记录起始点的位置
 	this->point[0].row = this->role.row;
 	this->point[0].col = this->role.col;
@@ -364,7 +364,7 @@ void Model::keyDown() {
 }
 
 // 结束条件判断
-bool Model::over(const int grid_num) {
+bool Model::over() {
 	// 判断数组中还有没有墙
 	for (int i = 0; i < grid_num; i++) {
 		for (int j = 0; j < grid_num; j++) {

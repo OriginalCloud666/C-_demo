@@ -8,8 +8,13 @@
 #include <time.h>
 #include <graphics.h>
 #include <mmsystem.h>
-
 using namespace std;
+
+auto const width = 640; // 窗口宽度
+auto const height = 720; // 窗口高度
+auto const bull_num = 50; // 子弹数目
+auto const balloon_num = 12; // 气球数量
+auto const barrel_speed = 0.01; // 炮管移动速度
 
 struct Battery { // 炮台
 	double x; // 炮管末端横坐标
@@ -51,20 +56,20 @@ private:
 public:
 	explicit Model();
 	~Model() = default;
-	void load(IMAGE& bk, IMAGE& w1, IMAGE& w2, IMAGE& w3, IMAGE& w4, const int width, const int height); // 加载资源
+	void load(IMAGE& bk, IMAGE& w1, IMAGE& w2, IMAGE& w3, IMAGE& w4); // 加载资源
 	void bgm(); // 加载音乐
-	void init(const int bull_num, const int balloon_num, const int width, const int height); // 初始化数据
+	void init(); // 初始化数据
 	void drawAlpha(IMAGE* picture, const int  picture_x, const int picture_y); // 载入PNG透明图片
 	void welcome(IMAGE& bk, IMAGE& w1, IMAGE& w2, IMAGE& w3, IMAGE& w4); // 绘制开始界面
-	void draw(IMAGE& bk, const int bull_num, const int balloon_num, const int height); // 绘制游戏界面
-	void creatBullet(const int bull_num); // 产生子弹
-	void speedBullet(const int bull_num); // 加速子弹
-	void fillBullet(const int bull_num, const int width, const int height); // 填充子弹
-	void moveBullet(const int bull_num); // 子弹移动
-	void creatBalloon(const int i, const int width, const int height); // 产生气球
-	void crashBalloon(const int bull_num, const int ball_num, const int width, const int height); // 气球碰撞
-	void moveBalloon(const int ball_num, const int width, const int height); // 气球移动
-	void mouseControl(const int bull_num, const int width, const int height); // 鼠标消息响应
-	void keyDown(const int bull_num, const int width, const int height); // 键盘消息响应（同步）
-	void keyDown2(const double barrel_speed); // 键盘消息响应（异步）
+	void draw(IMAGE& bk); // 绘制游戏界面
+	void creatBullet(); // 产生子弹
+	void speedBullet(); // 加速子弹
+	void fillBullet(); // 填充子弹
+	void moveBullet(); // 子弹移动
+	void creatBalloon(const int i); // 产生气球
+	void crashBalloon(); // 气球碰撞
+	void moveBalloon(); // 气球移动
+	void mouseControl(); // 鼠标消息响应
+	void keyDown(); // 键盘消息响应（同步）
+	void keyDown2(); // 键盘消息响应（异步）
 };

@@ -1,12 +1,6 @@
 ﻿#include "Model.h"
 using namespace std;
 
-auto const width = 640; // 窗口宽度
-auto const height = 720; // 窗口高度
-auto const grid_size = 50; // 格子大小
-auto const grid_num = 10; // 地图行列
-auto const point_num = 100; // 记录位置点的数量
-
 IMAGE bk; // 存放背景图片
 IMAGE w1; // 存放文字图片
 IMAGE w2; // 存放文字图片
@@ -20,8 +14,8 @@ int main(int argc, char* argv) {
 	pModel->bgm();
 	initgraph(width, height);
 	pModel->welcome(bk, w1, w2);
-	pModel->init(width, height, grid_num, grid_size, point_num);
-	pModel->pointInit(grid_num);
+	pModel->init();
+	pModel->pointInit();
 
 	fflush(stdin); // 清空键盘消息缓冲区
 	FlushMouseMsgBuffer(); // 清空鼠标消息缓冲区
@@ -36,18 +30,18 @@ int main(int argc, char* argv) {
 			pModel->getPoint()[pModel->getCount()].col = pModel->getRole().col;
 			pModel->getCount()++;
 		}
-		pModel->draw(grid_num, grid_size);
+		pModel->draw();
 		for (int i = 0; i < pModel->getCount() - 1; i++) {
-			pModel->drawLine(&pModel->getPoint()[i], &pModel->getPoint()[i + 1], grid_size);
+			pModel->drawLine(&pModel->getPoint()[i], &pModel->getPoint()[i + 1]);
 		}
 		FlushBatchDraw();
-		if (pModel->over(grid_num) == 1) {
+		if (pModel->over() == 1) {
 			pModel->getFlag()++;
 			if (pModel->getFlag() < 3) {
 				mciSendString("close littlewin", nullptr, 0, nullptr);
 				mciSendString("open ./resource/music/littlewin.wav alias littlewin", nullptr, 0, nullptr);
 				mciSendString("play littlewin", nullptr, 0, nullptr);
-				pModel->pointInit(grid_num); // 重新初始化数据
+				pModel->pointInit(); // 重新初始化数据
 				char fileName[25];
 				sprintf(fileName, "Welcome to the %d level!", pModel->getFlag() + 1);
 				MessageBox(GetHWnd(), fileName, "游戏继续！", MB_OK);

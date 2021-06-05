@@ -8,8 +8,13 @@
 #include <string>
 #include <graphics.h>
 #include <mmsystem.h>
-
 using namespace std;
+
+auto const width = 1280; // 窗口宽度
+auto const height = 720; // 窗口高度
+auto const str_width = 15; // 字符串宽度
+auto const str_num = 86; // 字符串数目
+auto const str_size = 20; // 字符串内字符数
 
 struct Rain { // 数据雨
 	char* str; // 字符串大小
@@ -27,9 +32,9 @@ public:
 	explicit Model() = default;
 	~Model() = default;
 	void bgm(); // 加载音乐
-	void init(const int str_num, const int str_size, const int str_width, const int height); // 初始化数据
+	void init(); // 初始化数据
 	char createChar(); // 产生字符
-	void rainChange(const int str_num, const int str_size); // 数字雨不断变化
-	void rainMove(const int str_num, const int str_size, const int str_width, const int height); // 数字雨移动
-	void printChar(const int str_num, const int str_size, const int str_width); // 输出显示字符
+	void rainChange(); // 数字雨不断变化
+	void rainMove(); // 数字雨移动
+	void printChar(); // 输出显示字符
 };

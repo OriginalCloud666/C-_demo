@@ -15,7 +15,7 @@ void Model::bgm() {
 }
 
 // 初始化数据
-void Model::init(const int grid_num, const int grid_length, const int width, const int height) {
+void Model::init() {
 	// 初始化游戏区域坐标
 	this->left = width / 2 - (grid_num * grid_length) / 2; // 游戏区域左上角x坐标
 	this->top = height / 2 - (grid_num * grid_length) / 2; // 游戏区域左上角y坐标
@@ -34,7 +34,7 @@ void Model::init(const int grid_num, const int grid_length, const int width, con
 }
 
 // 开始界面绘制
-void Model::welcome(IMAGE& bk, const int width, const int height) {
+void Model::welcome(IMAGE& bk) {
 	putimage(-50, -49, &bk);
 	setbkmode(TRANSPARENT);
 	SetWindowText(GetHWnd(), "C++涂格子游戏");
@@ -60,7 +60,7 @@ void Model::welcome(IMAGE& bk, const int width, const int height) {
 }
 
 // 游戏界面绘制
-void Model::draw(IMAGE& bk, const int grid_num, const int grid_length, const int width, const int height) {
+void Model::draw(IMAGE& bk) {
 	cleardevice();
 	putimage(-50, -49, &bk);
 
@@ -107,7 +107,7 @@ void Model::draw(IMAGE& bk, const int grid_num, const int grid_length, const int
 }
 
 // 鼠标消息响应
-void Model::mouseControl(const int grid_num, const int grid_length, const int width, const int height) {
+void Model::mouseControl() {
 	// 判断是否有鼠标消息
 	if (MouseHit()) {
 		// 获取鼠标消息
@@ -140,7 +140,7 @@ void Model::mouseControl(const int grid_num, const int grid_length, const int wi
 }
 
 // 游戏结束判断
-int Model::over(const int grid_num) { // 判断是否达到通关条件
+int Model::over() { // 判断是否达到通关条件
 	int count = 0; // 计数器
 	for (int i = 0; i < grid_num; i++) {
 		for (int k = 0; k < grid_num; k++) {

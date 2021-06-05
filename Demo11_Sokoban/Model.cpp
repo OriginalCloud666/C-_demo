@@ -61,7 +61,7 @@ void Model::bgm() {
 }
 
 // 初始化游戏数据
-void Model::init(const int width, const int height, const int grid_num, const int pic_size, const int cas) {
+void Model::init(const int width, const int height, const int grid_num, const int pic_size) {
 	// 初始化游戏区域坐标
 	this->left = width / 2 - (grid_num * pic_size) / 2;
 	this->top = height / 2 - (grid_num * pic_size) / 2;
@@ -120,7 +120,7 @@ void Model::draw(IMAGE& bk, vector<IMAGE>& img, const int grid_num, const int pi
 			int x = this->left + pic_size * j;
 			int y = this->top + pic_size * i;
 			// 对图片进行分发
-			switch (this->gameMapVec[flag][i][j]) {
+			switch (this->gameMapVec[this->flag][i][j]) {
 			case 0:
 				putimage(x, y, &img[0]);
 				break;
@@ -163,17 +163,17 @@ void Model::draw(IMAGE& bk, vector<IMAGE>& img, const int grid_num, const int pi
 // 遇到空地或推箱目的地时将对玩家原位置进行更改
 void Model::changOne(const int i, const int j) {
 	// 将玩家移动前的位置设置为空地或者推箱目的地
-	if (this->gameMapVec[flag][i][j] == 7 || this->gameMapVec[flag][i][j] == 9) { // 上
-		this->gameMapVec[flag][i][j] -= 5;
+	if (this->gameMapVec[this->flag][i][j] == 7 || this->gameMapVec[this->flag][i][j] == 9) { // 上
+		this->gameMapVec[this->flag][i][j] -= 5;
 	}
-	if (this->gameMapVec[flag][i][j] == 6 || this->gameMapVec[flag][i][j] == 8) { // 下
-		this->gameMapVec[flag][i][j] -= 4;
+	if (this->gameMapVec[this->flag][i][j] == 6 || this->gameMapVec[this->flag][i][j] == 8) { // 下
+		this->gameMapVec[this->flag][i][j] -= 4;
 	}
-	else if (this->gameMapVec[flag][i][j] == 10 || this->gameMapVec[flag][i][j] == 12) { // 左
-		this->gameMapVec[flag][i][j] -= 8;
+	else if (this->gameMapVec[this->flag][i][j] == 10 || this->gameMapVec[this->flag][i][j] == 12) { // 左
+		this->gameMapVec[this->flag][i][j] -= 8;
 	}
-	else if (this->gameMapVec[flag][i][j] == 11 || this->gameMapVec[flag][i][j] == 13) { // 右
-		this->gameMapVec[flag][i][j] -= 9;
+	else if (this->gameMapVec[this->flag][i][j] == 11 || this->gameMapVec[this->flag][i][j] == 13) { // 右
+		this->gameMapVec[this->flag][i][j] -= 9;
 	}
 }
 
@@ -190,11 +190,11 @@ void Model::keyDown(const int grid_num) {
 		for (i = 0; i < grid_num; i++) {
 			for (j = 0; j < grid_num; j++) {
 				// 玩家的不同朝向
-				if (this->gameMapVec[flag][i][j] >= 6 && this->gameMapVec[flag][i][j] <= 13) {
+				if (this->gameMapVec[this->flag][i][j] >= 6 && this->gameMapVec[this->flag][i][j] <= 13) {
 					break;
 				}
 			}
-			if (this->gameMapVec[flag][i][j] >= 6 && this->gameMapVec[flag][i][j] <= 13) {
+			if (this->gameMapVec[this->flag][i][j] >= 6 && this->gameMapVec[this->flag][i][j] <= 13) {
 				break;
 			}
 		}
@@ -207,18 +207,18 @@ void Model::keyDown(const int grid_num) {
 			mciSendString("close click", nullptr, 0, nullptr);
 			mciSendString("open ./resource/music/click.wav alias click", nullptr, 0, nullptr);
 			mciSendString("play click", nullptr, 0, nullptr);
-			if (this->gameMapVec[flag][i - 1][j] == 2 || this->gameMapVec[flag][i - 1][j] == 4) {
+			if (this->gameMapVec[this->flag][i - 1][j] == 2 || this->gameMapVec[this->flag][i - 1][j] == 4) {
 				// 如果遇到到是空地或推箱目的地
 				this->changOne(i, j); // 玩家离开原位置
-				this->gameMapVec[flag][i - 1][j] += 5;
+				this->gameMapVec[this->flag][i - 1][j] += 5;
 			}
-			if (this->gameMapVec[flag][i - 1][j] == 3 || this->gameMapVec[flag][i - 1][j] == 5) {
+			if (this->gameMapVec[this->flag][i - 1][j] == 3 || this->gameMapVec[this->flag][i - 1][j] == 5) {
 				// 如果遇到的是箱子或箱子在目的地时
-				if (this->gameMapVec[flag][i - 2][j] == 2 || this->gameMapVec[flag][i - 2][j] == 4) {
+				if (this->gameMapVec[this->flag][i - 2][j] == 2 || this->gameMapVec[this->flag][i - 2][j] == 4) {
 					// 如果箱子旁的是空地或推箱目的地
 					this->changOne(i, j); // 玩家离开原位置
-					this->gameMapVec[flag][i - 1][j] += (5 - 1); // 玩家到达箱子位置
-					this->gameMapVec[flag][i - 2][j] += 1; // 箱子到达新位置
+					this->gameMapVec[this->flag][i - 1][j] += (5 - 1); // 玩家到达箱子位置
+					this->gameMapVec[this->flag][i - 2][j] += 1; // 箱子到达新位置
 				}
 			}
 			break;
@@ -228,18 +228,18 @@ void Model::keyDown(const int grid_num) {
 			mciSendString("close click", nullptr, 0, nullptr);
 			mciSendString("open ./resource/music/click.wav alias click", nullptr, 0, nullptr);
 			mciSendString("play click", nullptr, 0, nullptr);
-			if (this->gameMapVec[flag][i + 1][j] == 2 || this->gameMapVec[flag][i + 1][j] == 4) {
+			if (this->gameMapVec[this->flag][i + 1][j] == 2 || this->gameMapVec[this->flag][i + 1][j] == 4) {
 				// 如果遇到到是空地或推箱目的地
 				this->changOne(i, j); // 玩家离开原位置
-				this->gameMapVec[flag][i + 1][j] += 4;
+				this->gameMapVec[this->flag][i + 1][j] += 4;
 			}
-			if (this->gameMapVec[flag][i + 1][j] == 3 || this->gameMapVec[flag][i + 1][j] == 5) {
+			if (this->gameMapVec[this->flag][i + 1][j] == 3 || this->gameMapVec[this->flag][i + 1][j] == 5) {
 				// 如果遇到的是箱子或箱子在目的地时
-				if (this->gameMapVec[flag][i + 2][j] == 2 || this->gameMapVec[flag][i + 2][j] == 4) {
+				if (this->gameMapVec[this->flag][i + 2][j] == 2 || this->gameMapVec[this->flag][i + 2][j] == 4) {
 					// 如果箱子旁的是空地或推箱目的地
 					this->changOne(i, j); // 玩家离开原位置
-					this->gameMapVec[flag][i + 1][j] += (4 - 1); // 玩家到达箱子位置
-					this->gameMapVec[flag][i + 2][j] += 1; // 箱子到达新位置
+					this->gameMapVec[this->flag][i + 1][j] += (4 - 1); // 玩家到达箱子位置
+					this->gameMapVec[this->flag][i + 2][j] += 1; // 箱子到达新位置
 				}
 			}
 			break;
@@ -249,18 +249,18 @@ void Model::keyDown(const int grid_num) {
 			mciSendString("close click", nullptr, 0, nullptr);
 			mciSendString("open ./resource/music/click.wav alias click", nullptr, 0, nullptr);
 			mciSendString("play click", nullptr, 0, nullptr);
-			if (this->gameMapVec[flag][i][j - 1] == 2 || this->gameMapVec[flag][i][j - 1] == 4) {
+			if (this->gameMapVec[this->flag][i][j - 1] == 2 || this->gameMapVec[this->flag][i][j - 1] == 4) {
 				// 如果遇到到是空地或推箱目的地
 				this->changOne(i, j); // 玩家离开原位置
-				this->gameMapVec[flag][i][j - 1] += 8;
+				this->gameMapVec[this->flag][i][j - 1] += 8;
 			}
-			if (this->gameMapVec[flag][i][j - 1] == 3 || this->gameMapVec[flag][i][j - 1] == 5) {
+			if (this->gameMapVec[this->flag][i][j - 1] == 3 || this->gameMapVec[this->flag][i][j - 1] == 5) {
 				// 如果遇到的是箱子或箱子在目的地时
-				if (this->gameMapVec[flag][i][j - 2] == 2 || this->gameMapVec[flag][i][j - 2] == 4) {
+				if (this->gameMapVec[this->flag][i][j - 2] == 2 || this->gameMapVec[this->flag][i][j - 2] == 4) {
 					// 如果箱子旁的是空地或推箱目的地
 					this->changOne(i, j); // 玩家离开原位置
-					this->gameMapVec[flag][i][j - 1] += (8 - 1); // 玩家到达箱子位置
-					this->gameMapVec[flag][i][j - 2] += 1; // 箱子到达新位置
+					this->gameMapVec[this->flag][i][j - 1] += (8 - 1); // 玩家到达箱子位置
+					this->gameMapVec[this->flag][i][j - 2] += 1; // 箱子到达新位置
 				}
 			}
 			break;
@@ -270,18 +270,18 @@ void Model::keyDown(const int grid_num) {
 			mciSendString("close click", nullptr, 0, nullptr);
 			mciSendString("open ./resource/music/click.wav alias click", nullptr, 0, nullptr);
 			mciSendString("play click", nullptr, 0, nullptr);
-			if (this->gameMapVec[flag][i][j + 1] == 2 || this->gameMapVec[flag][i][j + 1] == 4) {
+			if (this->gameMapVec[this->flag][i][j + 1] == 2 || this->gameMapVec[this->flag][i][j + 1] == 4) {
 				// 如果遇到到是空地或推箱目的地
 				this->changOne(i, j); // 玩家离开原位置
-				this->gameMapVec[flag][i][j + 1] += 9;
+				this->gameMapVec[this->flag][i][j + 1] += 9;
 			}
-			if (this->gameMapVec[flag][i][j + 1] == 3 || this->gameMapVec[flag][i][j + 1] == 5) {
+			if (this->gameMapVec[this->flag][i][j + 1] == 3 || this->gameMapVec[this->flag][i][j + 1] == 5) {
 				// 如果遇到的是箱子或箱子在目的地时
-				if (this->gameMapVec[flag][i][j + 2] == 2 || this->gameMapVec[flag][i][j + 2] == 4) {
+				if (this->gameMapVec[this->flag][i][j + 2] == 2 || this->gameMapVec[this->flag][i][j + 2] == 4) {
 					// 如果箱子旁的是空地或推箱目的地
 					this->changOne(i, j); // 玩家离开原位置
-					this->gameMapVec[flag][i][j + 1] += (9 - 1); // 玩家到达箱子位置
-					this->gameMapVec[flag][i][j + 2] += 1; // 箱子到达新位置
+					this->gameMapVec[this->flag][i][j + 1] += (9 - 1); // 玩家到达箱子位置
+					this->gameMapVec[this->flag][i][j + 2] += 1; // 箱子到达新位置
 				}
 			}
 			break;
@@ -295,7 +295,7 @@ int Model::over(const int grid_num) {
 	int countFlag = 1;
 	for (int i = 0; i < grid_num; i++) {
 		for (int j = 0; j < grid_num; j++) {
-			if (this->gameMapVec[flag][i][j] == 3) {
+			if (this->gameMapVec[this->flag][i][j] == 3) {
 				// 如果游戏中仍存在未到目的地的箱子则游戏并未结束
 				countFlag = 0;
 				return countFlag;

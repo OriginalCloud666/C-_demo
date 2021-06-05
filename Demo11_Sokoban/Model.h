@@ -25,7 +25,7 @@ public:
 	int& getFlag();
 	void load(IMAGE& bk, vector<IMAGE>& img, vector<int>& imgIndex, const int pic_num, const int pic_size, const int width, const int height); // 加载资源
 	void bgm(); // 加载音乐
-	void init(const int width, const int height, const int grid_num, const int pic_size, const int cas); // 初始化数据
+	void init(const int width, const int height, const int grid_num, const int pic_size); // 初始化数据
 	void welcome(IMAGE& bk); // 绘制开始界面
 	void draw(IMAGE& bk, vector<IMAGE>& img, const int grid_num, const int pic_size); // 绘制游戏界面
 	void changOne(const int i, const int j); // 更改玩家位置

@@ -83,4 +83,4 @@
 
 - **简单介绍：实现的一个`Break-Bricks`（打砖块）小游戏，击碎所有砖块即可获得胜利。**
 
-![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210605205249.png)
+![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210605215802.png)

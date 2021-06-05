@@ -78,3 +78,9 @@
 - **简单介绍：实现的一个`Data-Rain`（数据雨）科幻效果，模仿黑客帝国数据雨的视觉动态效果。**
 
 ![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210605170411.png)
+
+#### Demo_14：Break-Bricks
+
+- **简单介绍：实现的一个`Break-Bricks`（打砖块）小游戏，击碎所有砖块即可获得胜利。**
+
+![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210605205249.png)

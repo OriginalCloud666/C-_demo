@@ -84,3 +84,15 @@
 - **简单介绍：实现的一个`Break-Bricks`（打砖块）小游戏，击碎所有砖块即可获得胜利。**
 
 ![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210605215802.png)
+
+#### Demo_15：Beautiful-Chicken
+
+- **简单介绍：实现的一个`Beautiful-Chicken`（鸡你太美）小游戏，鸡哥推箱子，律师函警告。**
+
+![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210606132355.png)
+
+#### Demo_14：Gluttonous-Snake
+
+- **简单介绍：实现的一个`Gluttonous-Snake`（贪吃蛇）小游戏，经典游戏贪吃蛇。**
+
+![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210606132400.png)

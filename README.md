@@ -91,7 +91,7 @@
 
 ![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210606132355.png)
 
-#### Demo_14：Gluttonous-Snake
+#### Demo_16：Gluttonous-Snake
 
 - **简单介绍：实现的一个`Gluttonous-Snake`（贪吃蛇）小游戏，经典游戏贪吃蛇。**
 

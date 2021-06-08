@@ -37,7 +37,7 @@ private:
 	vector<vector<vector<int>>> gameMapVec; // 存放地图及关卡信息
 public:
 	explicit Model();
-	~Model() = default;
+	~Model();
 	int& getFlag();
 	struct Button*& getBeginGame();
 	void load(IMAGE& bk, IMAGE& button, vector<IMAGE>& img, vector<int>& imgIndex); // 加载资源

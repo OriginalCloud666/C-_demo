@@ -37,6 +37,11 @@ Model::Model() :top(0), left(0), down(0), right(0), flag(0) {
 	};
 }
 
+Model::~Model() {
+	delete this->beginGame;
+	this->beginGame = nullptr;
+}
+
 // 获取flag
 int& Model::getFlag() {
 	return this->flag;
@@ -68,7 +73,7 @@ void Model::bgm() {
 
 // 创建按钮
 struct Button* Model::creatButton(int x, int y, int width, int height, COLORREF color1, COLORREF color2) {
-	struct Button* pButton = (struct Button*)malloc(sizeof(struct Button));
+	struct Button* pButton = new struct Button;
 	pButton->x = x;
 	pButton->y = y;
 	pButton->width = width;

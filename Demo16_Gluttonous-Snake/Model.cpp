@@ -6,6 +6,13 @@ Model::Model() {
 	this->endGame = creatButton(395, 220, 150, 50, "结束游戏", 18, 12, WHITE, RGB(150, 150, 150));
 }
 
+Model::~Model() {
+	delete this->beginGame;
+	this->beginGame = nullptr;
+	delete this->endGame;
+	this->endGame = nullptr;
+}
+
 // 获取food
 struct Food& Model::getFood() {
 	return this->food;
@@ -40,7 +47,7 @@ void Model::bgm() {
 // 创建按钮
 struct Button* Model::creatButton(const int x, const int y, const int width, const int height,
 	const char* text, const int dx, const int dy, COLORREF buttoncolor, COLORREF textcolor) {
-	struct Button* pButton = (struct Button*)malloc(sizeof(struct Button));
+	struct Button* pButton = new struct Button;
 	pButton->x = x;
 	pButton->y = y;
 	pButton->width = width;

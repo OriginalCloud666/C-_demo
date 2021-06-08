@@ -62,7 +62,7 @@ private:
 	struct Button* endGame; // ½áÊø°´Å¥
 public:
 	explicit Model();
-	~Model() = default;
+	~Model();
 	struct Food& getFood();
 	struct Snake& getSnake();
 	struct Button*& getButton1();

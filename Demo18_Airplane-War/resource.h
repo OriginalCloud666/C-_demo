@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ 生成的包含文件。
-// 供 Demo17_Flying-Bird.rc 使用
+// 供 Demo18_Airplane-War.rc 使用
 //
 #define IDI_ICON1                       101
 

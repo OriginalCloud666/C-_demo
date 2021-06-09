@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{9616caaa-7a54-4cef-989a-4a0e7055da0a}</ProjectGuid>
-    <RootNamespace>Demo17FlyingBird</RootNamespace>
+    <ProjectGuid>{29d6a6f5-370c-4809-bf59-3ea8544774af}</ProjectGuid>
+    <RootNamespace>Demo18AirplaneWar</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -140,15 +140,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Plane.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Plane.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Demo17_Flying-Bird.rc" />
+    <ResourceCompile Include="Demo18_Airplane-War.rc" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resource\picture\logo.ico" />

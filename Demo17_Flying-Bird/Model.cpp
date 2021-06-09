@@ -140,7 +140,7 @@ void Model::drawBackground(IMAGE& bk, struct BkDown mybkdown) {
 void Model::welcome(IMAGE& bk, IMAGE guid[]) {
 	cleardevice();
 	putimage(0, 0, &bk);
-	SetWindowText(GetHWnd(), "C+飞翔的小鸟");
+	SetWindowText(GetHWnd(), "C++飞翔的小鸟");
 
 	this->drawGuid(guid, 10, 10); // 绘制引导图片
 	this->drawButton(beginGame); // 绘制开始按钮

@@ -96,3 +96,15 @@
 - **简单介绍：实现的一个`Gluttonous-Snake`（贪吃蛇）小游戏，经典游戏贪吃蛇。**
 
 ![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210606132400.png)
+
+#### Demo_17：Flying-Bird
+
+- **简单介绍：实现的一个`Flying-Bird`（飞翔的小鸟）小游戏，模仿同名热门游戏，空格键操作。**
+
+![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210609132723.png)
+
+#### Demo_18：Airplane-War
+
+- **简单介绍：实现的一个`Airplane-War`（飞机大战）小游戏，模仿同名热门游戏，方向键移动，空格键发射子弹。**
+
+![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210609132719.png)

@@ -108,3 +108,27 @@
 - **简单介绍：实现的一个`Airplane-War`（飞机大战）小游戏，模仿同名热门游戏，方向键移动，空格键发射子弹。**
 
 ![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210609132719.png)
+
+#### Demo_19：Gold-Miners
+
+- **简单介绍：实现的一个`Gold-Miners`（黄金矿工）小游戏，模仿同名热门游戏，空格键进行操作。**
+
+![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210609180351.png)
+
+#### Demo_20：Rotating-Flower
+
+- **简单介绍：实现的一个`Rotating-Flower`（旋转花）视觉效果，小球动态旋转跳跃。**
+
+![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210609180415.png)
+
+#### Demo_21：Cherry-Trees
+
+- **简单介绍：实现的一个`Cherry-Trees`（樱花树）视觉效果，樱花绽放效果。**
+
+![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210609180402.png)
+
+#### Demo_22：Airplane-War
+
+- **简单介绍：实现的一个`Eliminate-Typing`（程序员打字）小游戏，练习打字速度。**
+
+![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210609180407.png)

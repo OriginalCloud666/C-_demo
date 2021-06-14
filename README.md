@@ -127,8 +127,57 @@
 
 ![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210609180402.png)
 
-#### Demo_22：Airplane-War
+#### Demo_22：Eliminate-Typing
 
 - **简单介绍：实现的一个`Eliminate-Typing`（程序员打字）小游戏，练习打字速度。**
 
 ![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210609180407.png)
+
+#### Demo_23：Insert-Needle
+
+- **简单介绍：实现的一个`Insert-Needle`（见缝插针）小游戏，两玩家比拼，键盘操作。**
+
+![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210614233543.png)
+
+#### Demo_24：Cartoon-Eliminate
+
+- **简单介绍：实现的一个`Cartoon-Eliminate`（卡通消消）小游戏，海底动物连连看。**
+
+![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210614233549.png)
+
+#### Demo_25：Agile-Buddy
+
+- **简单介绍：实现的一个`Agile-Buddy`（勇者闯关）小游戏，模仿同名热门游戏，是勇者就下一百层。**
+
+![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210614233546.png)
+
+#### Demo_26：Car-Racing
+
+- **简单介绍：实现的一个`Car-Racing`（赛车竞速）小游戏，方向键操作，赛车躲避障碍。**
+
+![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210614233537.png)
+
+#### Demo_27：Gobang
+
+- **简单介绍：实现的一个`Gobang`（五子棋）小游戏，模仿同名热门游戏，黑白双方玩家，通过键盘操作。**
+
+![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210614233540.png)
+
+#### Demo_28：Takegism
+
+- **简单介绍：实现的一个`Takegism`（密室逃脱）小游戏，逃脱达到终点即胜利。**
+
+![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210614233534.png)
+
+#### Demo_29：Run-Away
+
+- **简单介绍：实现的一个`Run-Away`（逃出升天）小游戏，逃离到达终点即可胜利。**
+
+![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210614233527.png)
+
+#### Demo_30：Depth-Pathfind
+
+- **简单介绍：实现的一个`Depth-Pathfind`（可视化深度寻路）效果，帮助深入理解深度寻路。**
+
+![](https://gitee.com/a-wei-y/gitee-table/raw/master/img/20210614233531.png)
+
